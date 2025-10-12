@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+set -e
+
+# Colors
+GREEN="\033[0;32m"
+RED="\033[0;31m"
+BLUE="\033[0;34m"
+BOLD="\033[1m"
+RESET="\033[0m"
+
+echo ""
+echo -e "${BOLD}${BLUE}🔍 Running static analysis and code style checks...${RESET}"
+echo ""
+
+# Run ECS
+echo -e "${BLUE}▶ ECS (Easy Coding Standard)${RESET}"
+if vendor/bin/ecs check; then
+  echo -e "${GREEN}✔ ECS passed${RESET}\n"
+else
+  echo -e "${RED}✘ ECS failed${RESET}"
+  exit 1
+fi
+
+# Run PHPStan
+echo -e "${BLUE}▶ PHPStan${RESET}"
+if vendor/bin/phpstan analyse --no-progress; then
+  echo -e "${GREEN}✔ PHPStan passed${RESET}\n"
+else
+  echo -e "${RED}✘ PHPStan failed${RESET}"
+  exit 1
+fi
+
+# Run Psalm
+echo -e "${BLUE}▶ Psalm${RESET}"
+if vendor/bin/psalm --no-cache; then
+  echo -e "${GREEN}✔ Psalm passed${RESET}\n"
+else
+  echo -e "${RED}✘ Psalm failed${RESET}"
+  exit 1
+fi
+
+echo -e "${BOLD}${GREEN}✅ All static analysis checks passed successfully!${RESET}"
