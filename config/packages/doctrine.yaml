@@ -4,7 +4,7 @@ doctrine:
 
         # IMPORTANT: You MUST configure your server version,
         # either here or in the DATABASE_URL env var (see .env file)
-        #server_version: '16'
+        server_version: '16'
 
         profiling_collect_backtrace: '%kernel.debug%'
         use_savepoints: true
@@ -21,9 +21,15 @@ doctrine:
             App:
                 type: attribute
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/Trailmind'
-                prefix: 'App\Trailmind'
+                dir: '%kernel.project_dir%/src'
+                prefix: 'App'
                 alias: App
+            Trailmind:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Infrastructure/Repository/config'
+                prefix: 'Trailmind'
+                alias: Trailmind
         controller_resolver:
             auto_mapping: false
 
