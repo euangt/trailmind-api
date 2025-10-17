@@ -17,6 +17,15 @@ class TrailSpec extends ObjectBehavior
         $this->shouldHaveType(Trail::class);
     }
 
+    function it_should_know_its_id()
+    {
+        $prop = new \ReflectionProperty(Trail::class, 'id');
+        $prop->setAccessible(true);
+        $prop->setValue($this->getWrappedObject(), '1234');
+
+        $this->getId()->shouldReturn('1234');
+    }
+
     function it_should_know_its_name()
     {
         $this->getName()->shouldReturn('Appalachian Trail');

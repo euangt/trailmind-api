@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity
+        name="Trailmind\Trail\Trail"
+        table="trails">
+      <id name="id" column="id" type="uuid">
+        <generator strategy="CUSTOM"/>
+        <custom-id-generator class="Ramsey\Uuid\Doctrine\UuidGenerator"/>
+      </id>
+        <field name="name" type="string"/>
+        <field name="difficulty" type="string"/>
+        <field name="length" type="float"/>
+  </entity>
+</doctrine-mapping>

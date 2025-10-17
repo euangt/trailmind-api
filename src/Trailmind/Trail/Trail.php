@@ -3,6 +3,8 @@ namespace Trailmind\Trail;
 
 class Trail
 {
+    private string $id;
+
     /**
      * @param string $name
      * @param string $difficulty
@@ -13,6 +15,13 @@ class Trail
         private string $difficulty, 
         private float $length
     ) {}
+
+    /**
+     * @return string|null
+     */
+    public function getId(): ?string {
+        return $this->id;
+    }
 
     /**
      * @return string
