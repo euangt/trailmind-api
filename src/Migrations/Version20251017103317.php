@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace DoctrineMigrations;
+namespace Trailmind\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
 /**
- * Auto-generated Migration: Please modify to your needs!
+ * Create trails table with UUID primary key
  */
 final class Version20251017103317 extends AbstractMigration
 {
