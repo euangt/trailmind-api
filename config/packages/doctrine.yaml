@@ -5,6 +5,9 @@ doctrine:
         # IMPORTANT: You MUST configure your server version,
         # either here or in the DATABASE_URL env var (see .env file)
         server_version: '16'
+        
+        # Exclude system schemas from introspection (keep topology for GIS)
+        schema_filter: ~^(?!information_schema|pg_catalog|pg_toast)~
 
         profiling_collect_backtrace: '%kernel.debug%'
         use_savepoints: true
