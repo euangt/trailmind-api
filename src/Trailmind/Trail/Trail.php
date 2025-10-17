@@ -3,7 +3,7 @@ namespace Trailmind\Trail;
 
 class Trail
 {
-    private string $id;
+    private $id;
 
     /**
      * @param string $name
