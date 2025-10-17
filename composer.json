@@ -56,12 +56,13 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "App\\": "src/",
+            "Trailmind\\": "src/Trailmind/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests/"
+            "spec\\": "spec/"
         }
     },
     "replace": {
