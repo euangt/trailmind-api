@@ -1,0 +1,4 @@
+services:
+  Trailmind\Trail\TrailRepository:
+    alias: Infrastructure\Repository\DoctrineTrailRepository
+    public: true

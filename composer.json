@@ -61,6 +61,7 @@
             "App\\": "src/",
             "Application\\": "src/Application/",
             "Dto\\": "src/Dto/",
+            "Infrastructure\\": "src/Infrastructure/",
             "Trailmind\\": "src/Trailmind/"
         }
     },
