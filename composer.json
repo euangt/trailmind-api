@@ -60,6 +60,7 @@
         "psr-4": {
             "App\\": "src/",
             "Application\\": "src/Application/",
+            "Controller\\": "src/Controller/",
             "Dto\\": "src/Dto/",
             "Infrastructure\\": "src/Infrastructure/",
             "Trailmind\\": "src/Trailmind/"
