@@ -9,6 +9,7 @@ Feature: User can view a trail
             | Name       | Difficulty | Length |
             | Base Trail | Easy       | 3      |
 
+    @v1.0
     Scenario: User views a trail's information page
         When I request details of the trail "Base Trail"
         Then the platform should respond that the request was successful
