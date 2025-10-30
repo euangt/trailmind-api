@@ -29,10 +29,13 @@ services:
     Dto\:
       resource: "../src/Dto/*"
 
-imports:
-  - { resource: services/repositories.yaml }
-
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
     # Event Listeners
+    Application\EventListener\JsonableViewListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.view }
+
+imports:
+  - { resource: services/repositories.yaml }
