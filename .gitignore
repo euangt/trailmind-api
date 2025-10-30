@@ -26,3 +26,7 @@ phpstan.neon
 ###> friends-of-behat/symfony-extension ###
 /behat.yml
 ###< friends-of-behat/symfony-extension ###
+
+###> Behat Error Reporting ###
+stacktrace.html
+###< Behat Error Reporting ###
