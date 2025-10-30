@@ -24,9 +24,7 @@ class DoctrineTrailRepository implements TrailRepository
     }
 
     /**
-     * @param string $id
-     * 
-     * @return Trail
+     * @inheritdoc
      */
     public function findOneById(string $id): Trail
     {
@@ -41,5 +39,14 @@ class DoctrineTrailRepository implements TrailRepository
         }
 
         return $trail;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function save(Trail $trail): void
+    {
+        $this->entityManager->persist($trail);
+        $this->entityManager->flush();
     }
 }

@@ -10,4 +10,9 @@ interface TrailRepository
      * @return Trail
      */
     public function findOneById(string $id): Trail;
+
+    /**
+     * @param Trail $trail
+     */
+    public function save(Trail $trail): void;
 }
