@@ -7,7 +7,7 @@ Feature: User can view a trail
     Background:
         Given there is the following trail:
             | Name       | Difficulty | Length |
-            | Base Trail | Easy       | 3      |
+            | Base Trail | Easy       | 3.1    |
 
     @v1.0
     Scenario: User views a trail's information page
@@ -15,4 +15,4 @@ Feature: User can view a trail
         Then the platform should respond that the request was successful
         Then I should see the trail information:
             | Name       | Difficulty | Length |
-            | Base Trail | Easy       | 3      |
+            | Base Trail | Easy       | 3.1    |

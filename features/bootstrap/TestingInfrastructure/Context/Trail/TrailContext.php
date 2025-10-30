@@ -49,7 +49,7 @@ class TrailContext implements Context
         $trail = new Trail(
             $trailData['Name'],
             $trailData['Difficulty'],
-            $trailData['Length']
+            (float) $trailData['Length']
         );
 
         $this->services->getTrailRepository()->save($trail);
