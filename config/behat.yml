@@ -1,0 +1,25 @@
+default:
+  formatters:
+    pretty: false
+    progress: true
+
+  suites:
+    default:
+      paths:
+        features: features/scenarios
+        bootstrap: features/bootstrap/TestingInfrastructure
+      contexts:
+        - features\TestingInfrastructure\Context\Trail\TrailContext:
+
+  gherkin:
+    filters:
+      tags: ~@wip
+
+  extensions:
+    FriendsOfBehat\SymfonyExtension: null
+
+    Behat\MinkExtension:
+      base_url: 'http://api.develop.trailmind.co.uk/'
+      sessions:
+        default:
+          symfony: ~

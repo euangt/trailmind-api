@@ -59,11 +59,10 @@
     "autoload": {
         "psr-4": {
             "App\\": "src/",
-            "Application\\": "src/Application/",
-            "Controller\\": "src/Controller/",
-            "Dto\\": "src/Dto/",
-            "Infrastructure\\": "src/Infrastructure/",
-            "Trailmind\\": "src/Trailmind/"
+            "": [
+                "src/",
+                "features/bootstrap/"
+            ]
         }
     },
     "autoload-dev": {
@@ -104,6 +103,12 @@
         }
     },
     "require-dev": {
+        "behat/behat": "^3.26",
+        "behat/mink": "dev-master",
+        "behat/mink-extension": "*",
+        "friends-of-behat/mink-browserkit-driver": "^1.6",
+        "friends-of-behat/mink-extension": "^2.6",
+        "friends-of-behat/symfony-extension": "^2.6",
         "phpspec/phpspec": "^8.0",
         "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^12.4",
