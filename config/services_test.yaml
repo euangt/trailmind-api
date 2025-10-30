@@ -11,3 +11,13 @@ services:
         public: true
         arguments:
             - '@kernel'
+
+    #Repositories
+    Infrastructure\Repository\DoctrineTrailRepository:
+      alias: TestingInfrastructure\Repositories\BehatDoctrineTrailRepository
+
+    TestingInfrastructure\Repositories\BehatDoctrineTrailRepository:
+      public: true
+      arguments:
+        - '@Doctrine\ORM\EntityManagerInterface'
+

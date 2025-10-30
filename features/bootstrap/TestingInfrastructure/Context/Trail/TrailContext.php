@@ -55,7 +55,12 @@ class TrailContext implements Context
     #[When('I request details of the trail :trailName')]
     public function iRequestDetailsOfTheTrail($trailName): void
     {
-        throw new PendingException();
+        $trail = $this->services->getTrailRepository()->findOneByName($trailName);
+
+        $this->requestContext->makeVersionedJsonRequest(
+            'GET',
+            '/trail/' . $trail->getId()
+        );
     }
 
     #[Then('I should see the trail information:')]
