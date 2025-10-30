@@ -13,7 +13,6 @@
         <field name="email" type="string" length="255"/>
         <field name="name" type="string" length="255"/>
         <field name="password" type="string" length="255" nullable="true"/>
-        <field name="salt" type="string" length="255" nullable="true"/>
         <field name="roles" type="json"/>
   </entity>
 </doctrine-mapping>

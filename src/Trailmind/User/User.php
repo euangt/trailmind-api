@@ -8,7 +8,6 @@ class User implements UserInterface
 {
     private ?string $id = null;
     private ?string $password = null;
-    private ?string $salt = null;
 
     public function __construct(
         private string $email,
@@ -51,22 +50,6 @@ class User implements UserInterface
     public function setPassword(string $password): void
     {
         $this->password = $password;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSalt(): ?string
-    {
-        return $this->salt;
-    }
-
-    /**
-     * @param string $salt
-     */
-    public function setSalt(string $salt): void
-    {
-        $this->salt = $salt;
     }
 
     /**
