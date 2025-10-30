@@ -13,6 +13,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Trailmind\Trail\Trail;
 use TestingInfrastructure\Services\ServiceProvider;
 use TestingInfrastructure\Context\Request\RequestContext;
+use TestingInfrastructure\Context\Response\ResponseContext;
 
 /**
  * Defines application features from the specific context.
@@ -21,6 +22,7 @@ class TrailContext implements Context
 {
     private ServiceProvider $services;
     private RequestContext $requestContext;
+    private ResponseContext $responseContext;
 
     public function __construct(
         KernelInterface $kernel
@@ -36,6 +38,7 @@ class TrailContext implements Context
     public function getOtherContexts(BeforeScenarioScope $scope)
     {
         $this->requestContext = $scope->getEnvironment()->getContext('TestingInfrastructure\Context\Request\RequestContext');
+        $this->responseContext = $scope->getEnvironment()->getContext('TestingInfrastructure\Context\Response\ResponseContext');
     }
 
     #[Given('there is the following trail:')]
@@ -66,6 +69,11 @@ class TrailContext implements Context
     #[Then('I should see the trail information:')]
     public function iShouldSeeTheTrailInformation(TableNode $table): void
     {
-        throw new PendingException();
+        $expectedTrail = $table->getColumnsHash()[0];
+        $responseTrail = $this->responseContext->getResponseAsObject();
+
+        assert($responseTrail->name === $expectedTrail['Name']);
+        assert($responseTrail->difficulty === $expectedTrail['Difficulty']);
+        assert($responseTrail->length === (float)$expectedTrail['Length']);
     }
 }
