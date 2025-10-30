@@ -8,7 +8,9 @@ default:
       paths:
         features: features/scenarios
       contexts:
+        - TestingInfrastructure\Context\Feature\FeatureContext
         - TestingInfrastructure\Context\Trail\TrailContext
+        - TestingInfrastructure\Context\Request\RequestContext
         - TestingInfrastructure\Context\Response\ResponseContext
 
   gherkin:
