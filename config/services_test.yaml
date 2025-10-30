@@ -2,3 +2,12 @@ services:
     _defaults:
         autowire: true
         autoconfigure: true
+
+    TestingInfrastructure\:
+        resource: '../features/bootstrap/TestingInfrastructure/*'
+
+    #Contexts
+    TestingInfrastructure\Context\Trail\TrailContext:
+        public: true
+        arguments:
+            - '@kernel'

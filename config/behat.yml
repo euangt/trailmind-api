@@ -7,16 +7,21 @@ default:
     default:
       paths:
         features: features/scenarios
-        bootstrap: features/bootstrap/TestingInfrastructure
       contexts:
-        - features\TestingInfrastructure\Context\Trail\TrailContext:
+        - TestingInfrastructure\Context\Trail\TrailContext
+        - TestingInfrastructure\Context\Response\ResponseContext
 
   gherkin:
     filters:
       tags: ~@wip
 
   extensions:
-    FriendsOfBehat\SymfonyExtension: null
+    FriendsOfBehat\SymfonyExtension:
+      bootstrap: features/bootstrap/bootstrap.php
+      kernel:
+        class: App\Kernel
+        environment: test
+        debug: true
 
     Behat\MinkExtension:
       base_url: 'http://api.develop.trailmind.co.uk/'
