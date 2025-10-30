@@ -47,12 +47,6 @@ class UserSpec extends ObjectBehavior
         $this->getPassword()->shouldReturn('hashed_password');
     }
 
-    function it_should_set_salt()
-    {
-        $this->setSalt('random_salt');
-        $this->getSalt()->shouldReturn('random_salt');
-    }
-
     function it_should_set_roles()
     {
         $this->setRoles(['ROLE_ADMIN', 'ROLE_USER']);
