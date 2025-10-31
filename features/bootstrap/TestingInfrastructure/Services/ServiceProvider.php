@@ -21,4 +21,12 @@ class ServiceProvider
     {
         return $this->kernel->getContainer()->get('Trailmind\Trail\TrailRepository');
     }
+
+    /**
+     * @return UserRepository
+     */
+    public function getUserRepository()
+    {
+        return $this->kernel->getContainer()->get('Trailmind\User\UserRepository');
+    }
 }

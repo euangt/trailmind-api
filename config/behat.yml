@@ -13,6 +13,7 @@ default:
         - TestingInfrastructure\Context\Register\RegisterContext
         - TestingInfrastructure\Context\Request\RequestContext
         - TestingInfrastructure\Context\Response\ResponseContext
+        - TestingInfrastructure\Context\User\UserContext
 
   gherkin:
     filters:

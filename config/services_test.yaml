@@ -17,6 +17,11 @@ services:
         arguments:
             - '@kernel'
 
+    TestingInfrastructure\Context\User\UserContext:
+        public: true
+        arguments:
+            - '@kernel'
+
     #Repositories
     Infrastructure\Repository\DoctrineTrailRepository:
       alias: TestingInfrastructure\Repositories\BehatDoctrineTrailRepository
