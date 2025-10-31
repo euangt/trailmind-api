@@ -44,6 +44,24 @@ class DoctrineUserRepository implements UserRepository
     /**
      * @inheritdoc
      */
+    public function findOneByEmail(string $email): User
+    {
+        try {
+            $user = $this->repository->findOneBy(['email' => $email]);
+        } catch (ConversionException $ce) {
+            $user = null;
+        }
+
+        if (is_null($user)) {
+            throw new UserNotFoundException();
+        }
+
+        return $user;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function save(User $user): void
     {
         $this->entityManager->persist($user);
