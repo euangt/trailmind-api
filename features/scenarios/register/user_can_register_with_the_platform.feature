@@ -19,25 +19,25 @@ Feature: User Registration
         When I request to register with the following details:
             | Name     | Password    | Username |
             | John Doe | password123 | john_doe |
-        Then the platform should respond that the request was bad
+        Then the platform should respond that the request had unprocessable content
 
     @v1.0
     Scenario: User cannot register without a name
         When I request to register with the following details:
             | Email                | Password    | Username |
             | john.doe@example.com | password123 | john_doe |
-        Then the platform should respond that the request was bad
+        Then the platform should respond that the request had unprocessable content
 
     @v1.0
     Scenario: User cannot register without a password
         When I request to register with the following details:
             | Email                | Name     | Username |
             | john.doe@example.com | John Doe | john_doe |
-        Then the platform should respond that the request was bad
+        Then the platform should respond that the request had unprocessable content
 
     @v1.0
     Scenario: User cannot register without a username
         When I request to register with the following details:
             | Email                | Name     | Password    |
             | john.doe@example.com | John Doe | password123 |
-        Then the platform should respond that the request was bad
+        Then the platform should respond that the request had unprocessable content

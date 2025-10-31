@@ -52,10 +52,10 @@ class RegisterContext implements Context
     private function buildRequestBody(array $userData): array
     {
         $data = [
-            'email' => $userData['Email'] ?: $userData['Email'],
-            'name' => $userData['Name'] ?: $userData['Name'],
-            'password' => $userData['Password'] ?: $userData['Password'],
-            'username' => $userData['Username'] ?: $userData['Username'],
+            'email' => $userData['Email'] ?? null,
+            'name' => $userData['Name'] ?? null,
+            'password' => $userData['Password'] ?? null,
+            'username' => $userData['Username'] ?? null,
         ];
 
         return $data;

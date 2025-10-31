@@ -45,11 +45,7 @@ class ResponseContext extends RawMinkContext
     public function thePlatformShouldRespondThatTheRequestWasSuccessful(): void
     {
         $receivedStatusCode = $this->getSession()->getStatusCode();
-        if ($receivedStatusCode === 500) {
-            $handle = fopen('stacktrace.html', 'w');
-            fwrite($handle, $this->getResponseAsJson());
-            fclose($handle);
-        }
+        $this->generateStacktraceFile($receivedStatusCode);
         if ($receivedStatusCode !== 200) {
             $response = $this->getResponseAsObject();
             throw new \UnexpectedValueException("Unexpected Status Code: " . $receivedStatusCode . ": " . $response->message);
@@ -60,14 +56,43 @@ class ResponseContext extends RawMinkContext
     public function thePlatformShouldRespondThatTheRequestWasSuccessfulWithoutAdditionalData(): void
     {
         $receivedStatusCode = $this->getSession()->getStatusCode();
+        $this->generateStacktraceFile($receivedStatusCode);
+        if ($receivedStatusCode !== 204) {
+            $response = $this->getResponseAsObject();
+            throw new \UnexpectedValueException("Unexpected Status Code: " . $receivedStatusCode . ": " . $response->message);
+        }
+    }
+
+    #[Then('the platform should respond that the request was bad')]
+    public function thePlatformShouldRespondThatTheRequestWasBad(): void
+    {
+        $receivedStatusCode = $this->getSession()->getStatusCode();
+        $this->generateStacktraceFile($receivedStatusCode);
+        if ($receivedStatusCode !== 400) {
+            $response = $this->getResponseAsObject();
+            var_dump($this->getResponseAsJson());
+            throw new \UnexpectedValueException("Unexpected Status Code: " . $receivedStatusCode . ": " . $response->message);
+        }
+    }
+
+    #[Then('the platform should respond that the request had unprocessable content')]
+    public function thePlatformShouldRespondThatTheRequestHadUnprocessableContent(): void
+    {
+        $receivedStatusCode = $this->getSession()->getStatusCode();
+        $this->generateStacktraceFile($receivedStatusCode);
+        if ($receivedStatusCode !== 422) {
+            $response = $this->getResponseAsObject();
+            var_dump($this->getResponseAsJson());
+            throw new \UnexpectedValueException("Unexpected Status Code: " . $receivedStatusCode . ": " . $response->message);
+        }
+    }
+
+    private function generateStacktraceFile(int $receivedStatusCode): void
+    {
         if ($receivedStatusCode === 500) {
             $handle = fopen('stacktrace.html', 'w');
             fwrite($handle, $this->getResponseAsJson());
             fclose($handle);
-        }
-        if ($receivedStatusCode !== 204) {
-            $response = $this->getResponseAsObject();
-            throw new \UnexpectedValueException("Unexpected Status Code: " . $receivedStatusCode . ": " . $response->message);
         }
     }
 }
