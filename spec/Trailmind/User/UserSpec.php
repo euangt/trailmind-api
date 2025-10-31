@@ -3,6 +3,8 @@
 namespace spec\Trailmind\User;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Trailmind\User\User;
 
 class UserSpec extends ObjectBehavior
@@ -15,6 +17,16 @@ class UserSpec extends ObjectBehavior
     function it_is_initializable()
     {
         $this->shouldHaveType(User::class);
+    }
+
+    function it_should_implement_UserInterface()
+    {
+        $this->shouldBeAnInstanceOf(UserInterface::class);
+    }
+
+    function it_should_implement_PasswordAuthenticatedUserInterface()
+    {
+        $this->shouldBeAnInstanceOf(PasswordAuthenticatedUserInterface::class);
     }
 
     function it_should_know_its_id()

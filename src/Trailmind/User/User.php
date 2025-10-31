@@ -2,9 +2,10 @@
 
 namespace Trailmind\User;
 
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class User implements UserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     private ?string $id = null;
     private ?string $password = null;
