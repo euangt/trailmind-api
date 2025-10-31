@@ -55,4 +55,19 @@ class ResponseContext extends RawMinkContext
             throw new \UnexpectedValueException("Unexpected Status Code: " . $receivedStatusCode . ": " . $response->message);
         }
     }
+
+    #[Then('the platform should respond that the request was successful without additional data')]
+    public function thePlatformShouldRespondThatTheRequestWasSuccessfulWithoutAdditionalData(): void
+    {
+        $receivedStatusCode = $this->getSession()->getStatusCode();
+        if ($receivedStatusCode === 500) {
+            $handle = fopen('stacktrace.html', 'w');
+            fwrite($handle, $this->getResponseAsJson());
+            fclose($handle);
+        }
+        if ($receivedStatusCode !== 204) {
+            $response = $this->getResponseAsObject();
+            throw new \UnexpectedValueException("Unexpected Status Code: " . $receivedStatusCode . ": " . $response->message);
+        }
+    }
 }
