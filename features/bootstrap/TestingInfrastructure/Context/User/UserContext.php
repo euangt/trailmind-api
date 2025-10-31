@@ -59,6 +59,6 @@ class UserContext implements Context
     #[Then('the user :user should have a password set')]
     public function theUserShouldHaveAPasswordSet($user): void
     {
-        assert($user->getPassword(), "Expected user {$user} to have a password set but none was found");
+        assert($user->getPassword(), "Expected user {$user->getName()} to have a password set but none was found");
     }
 }
