@@ -51,9 +51,9 @@ class UserContext implements Context
             throw new \UnexpectedValueException("No user found with email {$expectedUser['Email']}");
         }
 
-        foreach ($expectedUser as $key => $value) {
-            assert($user->{$key}() === $value, "Expected user {$key} to be {$value} but got {$user->{$key}()}");
-        }
+        assert($user->getEmail() === $expectedUser['Email'], "Expected user email to be {$expectedUser['Email']} but found {$user->getEmail()}");
+        assert($user->getName() === $expectedUser['Name'], "Expected user name to be {$expectedUser['Name']} but found {$user->getName()}");
+        assert($user->getUsername() === $expectedUser['Username'], "Expected user username to be {$expectedUser['Username']} but found {$user->getUsername()}");
     }
 
     #[Then('the user :user should have a password set')]

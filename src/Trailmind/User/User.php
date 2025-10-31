@@ -13,6 +13,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct(
         private string $email,
         private string $name,
+        private string $username,
         private array $roles = []
     ) {}
 
@@ -35,6 +36,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getName(): string {
         return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUsername(): string {
+        return $this->username;
     }
 
     /**

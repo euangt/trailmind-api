@@ -11,7 +11,7 @@ class UserSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('john.doe@example.com', 'John Doe', ['ROLE_USER']);
+        $this->beConstructedWith('john.doe@example.com', 'John Doe', 'username', ['ROLE_USER']);
     }
 
     function it_is_initializable()
@@ -46,6 +46,11 @@ class UserSpec extends ObjectBehavior
     function it_should_know_its_name()
     {
         $this->getName()->shouldReturn('John Doe');
+    }
+
+    function it_should_know_its_username()
+    {
+        $this->getUsername()->shouldReturn('username');
     }
 
     function it_should_know_its_roles()
