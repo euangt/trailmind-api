@@ -30,3 +30,7 @@ phpstan.neon
 ###> Behat Error Reporting ###
 stacktrace.html
 ###< Behat Error Reporting ###
+
+###> league/oauth2-server-bundle ###
+/config/jwt/*.pem
+###< league/oauth2-server-bundle ###
