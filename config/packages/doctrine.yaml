@@ -6,8 +6,13 @@ doctrine:
         # either here or in the DATABASE_URL env var (see .env file)
         server_version: '16'
         
-        # Exclude system schemas from introspection (keep topology for GIS)
-        schema_filter: ~^(?!information_schema|pg_catalog|pg_toast)~
+        # Exclude system schemas and PostGIS topology schemas from introspection
+        schema_filter: ~^(?!information_schema|pg_catalog|pg_toast|topology|trail_topology)~
+        
+        # Register PostGIS custom types
+        types:
+            geometry: Jsor\Doctrine\PostGIS\Types\GeometryType
+            geography: Jsor\Doctrine\PostGIS\Types\GeographyType
 
         profiling_collect_backtrace: '%kernel.debug%'
         use_savepoints: true

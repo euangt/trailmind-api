@@ -9,6 +9,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     private ?string $id = null;
     private ?string $password = null;
+    private ?string $token = null;
 
     public function __construct(
         private string $email,
@@ -110,5 +111,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUserIdentifier(): string
     {
         return $this->id;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    /**
+     * @param string $token
+     */
+    public function setToken(string $token): void
+    {
+        $this->token = $token;
     }
 }

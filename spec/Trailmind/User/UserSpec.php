@@ -101,4 +101,11 @@ class UserSpec extends ObjectBehavior
     {
         $this->eraseCredentials()->shouldReturn(null);
     }
+
+    function it_should_set_and_get_token()
+    {
+        $this->getToken()->shouldReturn(null);
+        $this->setToken('api-token-1234');
+        $this->getToken()->shouldReturn('api-token-1234');
+    }
 }
