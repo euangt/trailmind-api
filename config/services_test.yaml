@@ -22,6 +22,11 @@ services:
         arguments:
             - '@kernel'
 
+    TestingInfrastructure\Context\Authentication\AuthenticateContext:
+        public: true
+        arguments:
+            - '@kernel'
+
     #Repositories
     Infrastructure\Repository\DoctrineTrailRepository:
       alias: TestingInfrastructure\Repositories\BehatDoctrineTrailRepository

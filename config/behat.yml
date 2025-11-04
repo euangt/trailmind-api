@@ -8,6 +8,7 @@ default:
       paths:
         features: features/scenarios
       contexts:
+        - TestingInfrastructure\Context\Authentication\AuthenticateContext
         - TestingInfrastructure\Context\Feature\FeatureContext
         - TestingInfrastructure\Context\Trail\TrailContext
         - TestingInfrastructure\Context\Register\RegisterContext
