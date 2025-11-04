@@ -4,6 +4,7 @@ namespace spec\Controller\Authenticate;
 
 use Dto\Inbound\User\AuthenticatingUser;
 use Dto\Internal\Authentication\AccessToken;
+use Dto\Outbound\Authentication\AccessTokenBuilder;
 use Dto\Outbound\Success;
 use Infrastructure\Oauth2Server\TokenManager;
 use PhpSpec\ObjectBehavior;
@@ -18,11 +19,13 @@ class AuthenticateControllerSpec extends ObjectBehavior
 {
     function let(
         PasswordVerifier $passwordVerifier,
-        TokenManager $tokenManager
+        TokenManager $tokenManager,
+        AccessTokenBuilder $accessTokenBuilder
     ) {
         $this->beConstructedWith(
             $passwordVerifier,
-            $tokenManager
+            $tokenManager,
+            $accessTokenBuilder
         );
     }
 
@@ -31,7 +34,9 @@ class AuthenticateControllerSpec extends ObjectBehavior
         PasswordVerifier $passwordVerifier,
         TokenManager $tokenManager,
         AccessToken $accessToken,
-        Request $request
+        Request $request,
+        Success $success,
+        AccessTokenBuilder $accessTokenBuilder
     ) {
         $authenticatingUser = new AuthenticatingUser('email', 'password');
 
@@ -39,7 +44,10 @@ class AuthenticateControllerSpec extends ObjectBehavior
 
         $tokenManager->getAccessToken($request, $user)->willReturn($accessToken);
 
-        $this->postAuthenticateAction($authenticatingUser, $user, $request)->shouldBeAnInstanceOf(Success::class);
+        $accessTokenBuilder->setContext('v1.0_authenticate')->willReturn($accessTokenBuilder);
+        $accessTokenBuilder->build($accessToken)->willReturn($success);
+
+        $this->postAuthenticateAction($authenticatingUser, $user, $request)->shouldReturn($success);
     }
 
     function it_should_throw_unauthorized_exception_for_invalid_password(

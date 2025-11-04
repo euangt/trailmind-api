@@ -4,6 +4,7 @@ namespace Controller\Authenticate;
 
 use Application\ValueResolver\CustomisableValueResolver;
 use Dto\Inbound\User\AuthenticatingUser;
+use Dto\Outbound\Authentication\AccessTokenBuilder;
 use Dto\Outbound\Success;
 use Infrastructure\Oauth2Server\TokenManager;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +21,7 @@ class AuthenticateController
     public function __construct(
         private PasswordVerifier $passwordVerifier,
         private TokenManager $tokenManager,
+        private AccessTokenBuilder $accessTokenBuilder,
     ) {}
 
     #[Route('/v1.0/authenticate', methods: ['POST'], name: 'api_v1.0_authenticate')]
@@ -38,6 +40,8 @@ class AuthenticateController
             throw new BadRequestHttpException('Unable to create access token');
         }
 
-        return new Success();
+        return $this->accessTokenBuilder
+                ->setContext('v1.0_authenticate')
+                ->build($accessToken);
     }
 }
