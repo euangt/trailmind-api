@@ -1,4 +1,16 @@
 services:
+  Trailmind\Access\AccessTokenRepository:
+    alias: Infrastructure\Repository\DoctrineAccessTokenRepository
+    public: true
+
+  Trailmind\Access\RefreshTokenRepository:
+    alias: Infrastructure\Repository\DoctrineRefreshTokenRepository
+    public: true
+
+  Trailmind\Access\ClientRepository:
+    alias: Infrastructure\Repository\DoctrineClientRepository
+    public: true
+
   Trailmind\Trail\TrailRepository:
     alias: Infrastructure\Repository\DoctrineTrailRepository
     public: true
