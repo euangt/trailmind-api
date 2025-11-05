@@ -5,6 +5,7 @@ namespace TestingInfrastructure\Context\Request;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\MinkExtension\Context\RawMinkContext;
 use RuntimeException;
+use TestingInfrastructure\Context\Authentication\AuthenticateContext;
 
 class RequestContext extends RawMinkContext
 {
@@ -59,6 +60,9 @@ class RequestContext extends RawMinkContext
         if (isset($token)) {
             $server['HTTP_AUTHORIZATION'] = "Bearer $token";
         }
+
+        $server['HTTP_CLIENT_ID'] = AuthenticateContext::CLIENT_ID;
+        $server['HTTP_CLIENT_SECRET'] = AuthenticateContext::CLIENT_SECRET;
 
         $client->jsonRequest(
             $method,
