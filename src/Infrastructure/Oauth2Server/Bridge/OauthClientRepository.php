@@ -41,6 +41,11 @@ class OauthClientRepository implements ClientRepositoryInterface
      */
     public function validateClient(string $clientIdentifier, ?string $clientSecret, ?string $grantType): bool
     {
-        return true;
+        try {
+            $client = $this->clientRepository->findActiveById($clientIdentifier);
+            return hash_equals($client->getSecret(), (string)$clientSecret);
+        } catch (ClientNotFoundException $e) {
+            return false;
+        }
     }
 }
