@@ -24,15 +24,7 @@ interface AccessTokenRepository
      * @throws AccessTokenNotFoundException
      */
     public function findUnrevokedByUser(User $user): ?AccessToken;
-    
-    /**
-     * @param User $user
-     *
-     * @return AccessToken|null
-     *
-     * @throws AccessTokenNotFoundException
-     */
-    public function findInitialByUser(User $user): ?AccessToken;
+
     
     public function save(AccessToken $accessToken): void;
 }
