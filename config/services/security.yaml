@@ -1,0 +1,4 @@
+services:
+  Infrastructure\Oauth2Server\TokenGranter\TokenGranter:
+    alias: Infrastructure\Oauth2Server\TokenGranter\OpaqueTokenGranter
+    public: true

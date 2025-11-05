@@ -1,0 +1,28 @@
+services:
+
+    League\OAuth2\Server\AuthorizationServer:
+        arguments:
+            - '@Infrastructure\Oauth2Server\Bridge\OauthClientRepository'
+            - '@Infrastructure\Oauth2Server\Bridge\OauthAccessTokenRepository'
+            - '@Infrastructure\Oauth2Server\Bridge\OauthScopeRepository'
+            - '%env(OAUTH2_PRIVATE_KEY)%'
+            - '%env(OAUTH2_ENCRYPTION_KEY)%'
+            - null
+
+    League\OAuth2\Server\Grant\PasswordGrant:
+        arguments:
+            $userRepository: '@Infrastructure\Oauth2Server\Bridge\OauthUserRepository'
+            $refreshTokenRepository: '@Infrastructure\Oauth2Server\Bridge\OauthRefreshTokenRepository'
+
+    League\OAuth2\Server\Grant\RefreshTokenGrant:
+        arguments:
+            $refreshTokenRepository: '@Infrastructure\Oauth2Server\Bridge\OauthRefreshTokenRepository'
+
+    League\OAuth2\Server\ResourceServer:
+        arguments:
+            $accessTokenRepository: '@Infrastructure\Oauth2Server\Bridge\OauthAccessTokenRepository'
+            $publicKey: '%env(OAUTH2_PUBLIC_KEY)%'
+
+    Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory:
+
+    Lcobucci\JWT\Parser:
