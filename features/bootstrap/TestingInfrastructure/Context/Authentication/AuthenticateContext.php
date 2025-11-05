@@ -91,7 +91,9 @@ class AuthenticateContext implements Context
         $this->requestContext->makeVersionedJsonRequest(
             'POST',
             '/authenticate',
-            []
+            [
+                'email' => $email
+            ]
         );
     }
 
@@ -103,12 +105,5 @@ class AuthenticateContext implements Context
         assert(isset($responseData->access_token), 'Response does not contain access_token');
         assert(isset($responseData->refresh_token), 'Response does not contain refresh_token');
         assert(isset($responseData->expires_in), 'Response does not contain expires_in');
-    }
-
-
-    #[Then('the platform should respond that the attempt failed and the user is unauthorised')]
-    public function thePlatformShouldRespondThatTheAttemptFailedAndTheUserIsUnauthorised(): void
-    {
-        throw new PendingException();
     }
 }

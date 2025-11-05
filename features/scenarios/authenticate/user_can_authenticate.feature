@@ -15,7 +15,7 @@ Feature: user can authenticate
     @v1.0 @insulated
     Scenario: User cannot authenticate if password is not supplied
         When the user "user@user.com" authenticates with no password
-        Then the platform should respond that the attempt failed and the user is unauthorised
+        Then the platform should respond that the request had unprocessable content
 
     @v1.0
     Scenario: User cannot authenticate with the wrong password

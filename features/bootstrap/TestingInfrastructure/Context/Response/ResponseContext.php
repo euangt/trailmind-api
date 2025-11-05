@@ -2,8 +2,6 @@
 
 namespace TestingInfrastructure\Context\Response;
 
-use Behat\Behat\Context\Context;
-use Symfony\Component\HttpKernel\KernelInterface;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Step\Then;
 
@@ -47,8 +45,7 @@ class ResponseContext extends RawMinkContext
         $receivedStatusCode = $this->getSession()->getStatusCode();
         $this->generateStacktraceFile($receivedStatusCode);
         if ($receivedStatusCode !== 200) {
-            $response = $this->getResponseAsObject();
-            throw new \UnexpectedValueException("Unexpected Status Code: " . $receivedStatusCode . ": " . $response->message);
+            throw new \UnexpectedValueException("Unexpected Status Code: " . $receivedStatusCode . 'expected: 200');
         }
     }
 
@@ -58,8 +55,7 @@ class ResponseContext extends RawMinkContext
         $receivedStatusCode = $this->getSession()->getStatusCode();
         $this->generateStacktraceFile($receivedStatusCode);
         if ($receivedStatusCode !== 204) {
-            $response = $this->getResponseAsObject();
-            throw new \UnexpectedValueException("Unexpected Status Code: " . $receivedStatusCode . ": " . $response->message);
+            throw new \UnexpectedValueException("Unexpected Status Code: " . $receivedStatusCode . 'expected: 204');
         }
     }
 
@@ -69,9 +65,17 @@ class ResponseContext extends RawMinkContext
         $receivedStatusCode = $this->getSession()->getStatusCode();
         $this->generateStacktraceFile($receivedStatusCode);
         if ($receivedStatusCode !== 400) {
-            $response = $this->getResponseAsObject();
-            var_dump($this->getResponseAsJson());
-            throw new \UnexpectedValueException("Unexpected Status Code: " . $receivedStatusCode . ": " . $response->message);
+            throw new \UnexpectedValueException("Unexpected Status Code: " . $receivedStatusCode . 'expected: 400');
+        }
+    }
+
+    #[Then('the platform should respond that the attempt failed and the user is unauthorised')]
+    public function thePlatformShouldRespondThatTheAttemptFailedAndTheUserIsUnauthorised(): void
+    {
+        $receivedStatusCode = $this->getSession()->getStatusCode();
+        $this->generateStacktraceFile($receivedStatusCode);
+        if ($receivedStatusCode !== 401) {
+            throw new \UnexpectedValueException("Unexpected Status Code: " . $receivedStatusCode . 'expected: 401');
         }
     }
 
@@ -81,9 +85,7 @@ class ResponseContext extends RawMinkContext
         $receivedStatusCode = $this->getSession()->getStatusCode();
         $this->generateStacktraceFile($receivedStatusCode);
         if ($receivedStatusCode !== 422) {
-            $response = $this->getResponseAsObject();
-            var_dump($this->getResponseAsJson());
-            throw new \UnexpectedValueException("Unexpected Status Code: " . $receivedStatusCode . ": " . $response->message);
+            throw new \UnexpectedValueException("Unexpected Status Code: " . $receivedStatusCode . 'expected: 422');
         }
     }
 
