@@ -2,13 +2,17 @@
 
 namespace Trailmind\FileService;
 
+use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 use Trailmind\FileService\Exception\UnableToLoadFileException;
 
 abstract class FileLoader
 {
-    static protected const SUPPORTED_FILE_TYPE = '';
+    protected const SUPPORTED_FILE_TYPE = '';
 
-    abstract public function loadFile(string $filePath): void;
+    /**
+     * @throws FileNotFoundException
+     */
+    abstract public function loadFile(string $filePath): mixed;
 
     protected function validateFileType(mixed $file): void
     {

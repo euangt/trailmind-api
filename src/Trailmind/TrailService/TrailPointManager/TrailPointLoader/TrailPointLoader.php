@@ -6,5 +6,5 @@ use Trailmind\FileService\FileLoader;
 
 abstract class TrailPointLoader extends FileLoader
 {
-    static protected const SUPPORTED_FILE_TYPE = 'gpx';
+    protected const SUPPORTED_FILE_TYPE = 'gpx';
 }

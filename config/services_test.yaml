@@ -42,3 +42,11 @@ services:
       arguments:
         - '@Doctrine\ORM\EntityManagerInterface'
 
+    # Loaders
+    Trailmind\TrailService\TrailPointManager\TrailPointLoader\TrailPointLoader:
+        alias: TestingInfrastructure\FileLoaders\TestGPXFileLoader
+
+    TestingInfrastructure\FileLoaders\TestGPXFileLoader:
+        arguments:
+            $projectDir: '%kernel.project_dir%'
+
