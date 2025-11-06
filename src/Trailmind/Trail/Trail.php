@@ -5,6 +5,9 @@ namespace Trailmind\Trail;
 class Trail
 {
     private $id;
+    private ?TrailPoint $startPoint = null;
+    private ?TrailPoint $endPoint = null;
+    private ?string $route = null;
 
     public function __construct(
         private string $name,
@@ -39,5 +42,29 @@ class Trail
 
     public function setTrailPoints(array $trailPoints): void {
         $this->trailPoints = $trailPoints;
+    }
+
+    public function getStartPoint(): ?TrailPoint {
+        return $this->startPoint;
+    }
+
+    public function getEndPoint(): ?TrailPoint {
+        return $this->endPoint;
+    }
+
+    public function setStartPoint(TrailPoint $startPoint): void {
+        $this->startPoint = $startPoint;
+    }
+
+    public function setEndPoint(TrailPoint $endPoint): void {
+        $this->endPoint = $endPoint;
+    }
+
+    public function getRoute(): ?string {
+        return $this->route;
+    }
+
+    public function setRoute(?string $route): void {
+        $this->route = $route;
     }
 }

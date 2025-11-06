@@ -42,6 +42,24 @@ class TrailSpec extends ObjectBehavior
         $this->getLength()->shouldReturn(2190.0);
     }
 
+    function it_should_set_and_get_its_start_point(
+        TrailPoint $startPoint
+    )
+    {
+        $this->getStartPoint()->shouldReturn(null);
+        $this->setStartPoint($startPoint);
+        $this->getStartPoint()->shouldReturn($startPoint);
+    }
+
+    function it_should_set_and_get_its_end_point(
+        TrailPoint $endPoint
+    )
+    {
+        $this->getEndPoint()->shouldReturn(null);
+        $this->setEndPoint($endPoint);
+        $this->getEndPoint()->shouldReturn($endPoint);
+    }
+
     function it_should_get_and_set_trail_points(
         TrailPoint $trailPoint1,
         TrailPoint $trailPoint2,
@@ -53,5 +71,12 @@ class TrailSpec extends ObjectBehavior
 
         $this->addTrailPoint($trailPoint3);
         $this->getTrailPoints()->shouldReturn([$trailPoint1, $trailPoint2, $trailPoint3]);
+    }
+
+    function it_should_get_and_set_route()
+    {
+        $this->getRoute()->shouldReturn(null);
+        $this->setRoute('LINESTRING route data');
+        $this->getRoute()->shouldReturn('LINESTRING route data');
     }
 }
