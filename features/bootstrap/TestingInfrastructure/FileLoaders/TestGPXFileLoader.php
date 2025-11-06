@@ -30,6 +30,8 @@ class TestGPXFileLoader extends TrailPointLoader
             throw new FileNotFoundException("File not found for filename: {$filename}");
         }
 
-        return fopen($path, "r");
+        $this->validateFileType($path);
+
+        return simplexml_load_file($path);
     }
 }
