@@ -21,7 +21,6 @@ final class Version20251030142809 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE users DROP salt');
-        $this->addSql('ALTER INDEX uniq_1483a5e9e7927c74 RENAME TO UNIQ_USER_EMAIL');
     }
 
     public function down(Schema $schema): void
@@ -29,6 +28,5 @@ final class Version20251030142809 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SCHEMA public');
         $this->addSql('ALTER TABLE users ADD salt VARCHAR(255) DEFAULT NULL');
-        $this->addSql('ALTER INDEX uniq_user_email RENAME TO uniq_1483a5e9e7927c74');
     }
 }
