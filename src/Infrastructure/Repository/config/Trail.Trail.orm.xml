@@ -10,5 +10,11 @@
         <field name="name" type="string"/>
         <field name="difficulty" type="string"/>
         <field name="length" type="float"/>
+        <one-to-many field="trailPoints" target-entity="Trailmind\Trail\TrailPoint">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+            <mapped-by>trail</mapped-by>
+        </one-to-many>
   </entity>
 </doctrine-mapping>
