@@ -10,14 +10,8 @@ class AccessTokenBuilder extends EntityBuilder
 {
     protected const EXPECTED_CLASS = AccessToken::class;
 
-    /**
-     * @var AccessToken
-     */
     private AccessToken $accessToken;
 
-    /**
-     * @inheritdoc
-     */
     protected function initialise($initialisable): EntityBuilder
     {
         // For readability

@@ -23,13 +23,12 @@ class DoctrineUserRepository implements UserRepository
         $this->repository = $this->entityManager->getRepository(self::ENTITY);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function findOneById(string $id): User
     {
         try {
-            $user = $this->repository->findOneBy(['id' => $id]);
+            $user = $this->repository->findOneBy([
+                'id' => $id,
+            ]);
         } catch (ConversionException $ce) {
             $user = null;
         }
@@ -41,13 +40,12 @@ class DoctrineUserRepository implements UserRepository
         return $user;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function findOneByEmail(string $email): User
     {
         try {
-            $user = $this->repository->findOneBy(['email' => $email]);
+            $user = $this->repository->findOneBy([
+                'email' => $email,
+            ]);
         } catch (ConversionException $ce) {
             $user = null;
         }
@@ -59,9 +57,6 @@ class DoctrineUserRepository implements UserRepository
         return $user;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function save(User $user): void
     {
         $this->entityManager->persist($user);

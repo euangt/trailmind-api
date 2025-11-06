@@ -21,7 +21,6 @@ class Scope implements ScopeEntityInterface
 
     /**
      * @param string $id
-     * @return bool
      */
     public static function hasScope($id): bool
     {
@@ -30,8 +29,6 @@ class Scope implements ScopeEntityInterface
 
     /**
      * Get the data that should be serialized to JSON.
-     *
-     * @return mixed
      */
     public function jsonSerialize(): mixed
     {

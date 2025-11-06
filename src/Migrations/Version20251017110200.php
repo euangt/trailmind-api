@@ -21,10 +21,10 @@ final class Version20251017110200 extends AbstractMigration
     {
         // Enable PostGIS extension (if not already enabled)
         $this->addSql('CREATE EXTENSION IF NOT EXISTS postgis');
-        
+
         // Enable topology extension for advanced spatial operations
         $this->addSql('CREATE EXTENSION IF NOT EXISTS postgis_topology');
-        
+
         // Create topology schema and initialize topology system
         $this->addSql('SELECT topology.CreateTopology(\'trail_topology\', 4326, 0.0001)');
     }
@@ -33,7 +33,7 @@ final class Version20251017110200 extends AbstractMigration
     {
         // Drop the topology and clean up
         $this->addSql('SELECT topology.DropTopology(\'trail_topology\')');
-        
+
         // Remove extensions (be careful - these might be used by other apps)
         $this->addSql('DROP EXTENSION IF EXISTS postgis_topology CASCADE');
         $this->addSql('DROP EXTENSION IF EXISTS postgis CASCADE');

@@ -2,12 +2,12 @@
 
 namespace Infrastructure\Oauth2Server\Bridge;
 
+use League\OAuth2\Server\Entities\RefreshTokenEntityInterface;
+use League\OAuth2\Server\Repositories\RefreshTokenRepositoryInterface;
 use Trailmind\Access\AccessTokenRepository;
 use Trailmind\Access\Exception\RefreshTokenNotFoundException;
 use Trailmind\Access\RefreshToken as TrailmindRefreshToken;
 use Trailmind\Access\RefreshTokenRepository;
-use League\OAuth2\Server\Entities\RefreshTokenEntityInterface;
-use League\OAuth2\Server\Repositories\RefreshTokenRepositoryInterface;
 
 class OauthRefreshTokenRepository implements RefreshTokenRepositoryInterface
 {
@@ -15,32 +15,23 @@ class OauthRefreshTokenRepository implements RefreshTokenRepositoryInterface
         private AccessTokenRepository $accessTokenRepository,
         private RefreshTokenRepository $refreshTokenRepository
     ) {}
-    
-    /**
-     * {@inheritdoc}
-     */
+
     public function getNewRefreshToken(): RefreshTokenEntityInterface
     {
         return new RefreshToken();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function persistNewRefreshToken(RefreshTokenEntityInterface $refreshTokenEntity): void
     {
         $id = $refreshTokenEntity->getIdentifier();
         $accessTokenId = $refreshTokenEntity->getAccessToken()->getIdentifier();
         $accessToken = $this->accessTokenRepository->findOneById($accessTokenId);
         $expiryDateTime = $refreshTokenEntity->getExpiryDateTime();
-        
+
         $refreshToken = new TrailmindRefreshToken($id, $accessToken, $expiryDateTime);
         $this->refreshTokenRepository->save($refreshToken);
     }
-    
-    /**
-     * {@inheritdoc}
-     */
+
     public function revokeRefreshToken($tokenId): void
     {
         try {
@@ -52,9 +43,6 @@ class OauthRefreshTokenRepository implements RefreshTokenRepositoryInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isRefreshTokenRevoked($tokenId): bool
     {
         try {

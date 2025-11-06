@@ -11,11 +11,9 @@ use Trailmind\Trail\Trail;
 class TrailBuilder extends EntityBuilder
 {
     protected const EXPECTED_CLASS = Trail::class;
+
     protected const COLLECTION_NAME = 'trails';
 
-    /**
-     * @var Trail
-     */
     private Trail $trail;
 
     public function __construct(
@@ -24,13 +22,10 @@ class TrailBuilder extends EntityBuilder
     ) {
         $this->decorators = [
             $difficultyDecorator,
-            $lengthDecorator
+            $lengthDecorator,
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
     protected function initialise($initialisable): EntityBuilder
     {
         // For readability
@@ -43,14 +38,11 @@ class TrailBuilder extends EntityBuilder
         return $this;
     }
 
-    /**
-     * @inheritdoc
-     */
     protected function decorate(): self
     {
         foreach ($this->decorators as $decorator) {
             $decorator->withTrail($this->trail)
-                    ->decorate($this->dto, $this->context);
+                ->decorate($this->dto, $this->context);
         }
 
         return $this;

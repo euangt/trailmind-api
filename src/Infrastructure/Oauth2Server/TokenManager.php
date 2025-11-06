@@ -14,20 +14,17 @@ class TokenManager
     ) {}
 
     /**
-     * @param Request $request
-     * @param User $user
-     *
      * @return Token|null
      */
     public function getAccessToken(Request $request, User $user): ?AccessToken
     {
         $inputParams = [
-            "grant_type"=> "password",
-            "client_id"=> $request->server->get('HTTP_CLIENT_ID'),
-            "client_secret"=> $request->server->get('HTTP_CLIENT_SECRET'),
-            "scope"=> "*",
-            "username"=> $user->getEmail(),
-            "password"=> "authenticated"  // Any non-empty string as password has already been verified
+            "grant_type" => "password",
+            "client_id" => $request->server->get('HTTP_CLIENT_ID'),
+            "client_secret" => $request->server->get('HTTP_CLIENT_SECRET'),
+            "scope" => "*",
+            "username" => $user->getEmail(),
+            "password" => "authenticated",  // Any non-empty string as password has already been verified
         ];
 
         return $this->tokenGranter->grantAccessToken($request, $inputParams);

@@ -4,9 +4,9 @@ namespace Application\ValueResolver;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Attribute\AsTargetedValueResolver;
 use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
-use Symfony\Component\HttpKernel\Attribute\AsTargetedValueResolver;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -17,12 +17,6 @@ class EntityValueResolver extends CoreValueResolver implements ValueResolverInte
         private EntityManagerInterface $entityManager
     ) {}
 
-    /**
-     * @param Request $request
-     * @param ArgumentMetadata $argument
-     *
-     * @return iterable
-     */
     public function resolve(Request $request, ArgumentMetadata $argument): iterable
     {
         $options = $this->getOptions($argument);
@@ -40,7 +34,9 @@ class EntityValueResolver extends CoreValueResolver implements ValueResolverInte
             return [];
         }
 
-        $entity = $repository->findOneBy([$repositoryMapping => $value]);
+        $entity = $repository->findOneBy([
+            $repositoryMapping => $value,
+        ]);
 
         if (is_null($entity)) {
             if ($this->isNullable($options)) {
@@ -55,9 +51,6 @@ class EntityValueResolver extends CoreValueResolver implements ValueResolverInte
         return [$entity];
     }
 
-    /**
-     * @param $options
-     */
     public function determineRepository(array $options)
     {
         $class = $options['class'];
@@ -71,8 +64,6 @@ class EntityValueResolver extends CoreValueResolver implements ValueResolverInte
      *  the key required to look the entity up in the database
      *  e.g.
      *  ['entity_id', 'id']
-     *
-     * @param array $options
      *
      * @return array
      */
@@ -96,9 +87,6 @@ class EntityValueResolver extends CoreValueResolver implements ValueResolverInte
     }
 
     /**
-     * @param Request $request
-     * @param string $requestMapping
-     *
      * @throws BadRequestHttpException
      *
      * @return array

@@ -8,5 +8,5 @@ use League\OAuth2\Server\Entities\Traits\RefreshTokenTrait;
 
 class RefreshToken implements RefreshTokenEntityInterface
 {
-    use EntityTrait, RefreshTokenTrait;
+    use EntityTrait; use RefreshTokenTrait;
 }

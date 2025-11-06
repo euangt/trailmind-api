@@ -2,9 +2,9 @@
 
 namespace Infrastructure\Repository;
 
-use Doctrine\Persistence\ObjectRepository;
 use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ObjectRepository;
 use Trailmind\Access\AccessToken;
 use Trailmind\Access\AccessTokenRepository;
 use Trailmind\Access\Exception\AccessTokenNotFoundException;
@@ -26,13 +26,12 @@ final class DoctrineAccessTokenRepository implements AccessTokenRepository
         $this->repository = $this->entityManager->getRepository(self::ENTITY);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findOneById(string $id): ?AccessToken
     {
         try {
-            $accessToken = $this->repository->findOneBy(['id' => $id]);
+            $accessToken = $this->repository->findOneBy([
+                'id' => $id,
+            ]);
         } catch (ConversionException $ce) {
             $accessToken = null;
         }
@@ -49,12 +48,12 @@ final class DoctrineAccessTokenRepository implements AccessTokenRepository
         return $this->repository->findAll();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findUnrevokedByUser(User $user): ?AccessToken
     {
-        $accessToken = $this->repository->findOneBy(['user' => $user, 'revoked'=> false]);
+        $accessToken = $this->repository->findOneBy([
+            'user' => $user,
+            'revoked' => false,
+        ]);
 
         if (is_null($accessToken)) {
             throw new AccessTokenNotFoundException();

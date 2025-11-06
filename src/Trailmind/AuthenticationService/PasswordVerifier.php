@@ -11,12 +11,6 @@ class PasswordVerifier
         private UserPasswordHasherInterface $passwordHasher
     ) {}
 
-    /**
-     * @param User   $user
-     * @param string $plainTextPassword
-     *
-     * @return bool
-     */
     public function verifyPassword(User $user, string $plainTextPassword): bool
     {
         // A user will have to work very hard to get here without a password but it has been done.

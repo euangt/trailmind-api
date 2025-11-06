@@ -2,11 +2,11 @@
 
 namespace Infrastructure\Oauth2Server\Bridge;
 
-use Trailmind\User\Exception\UserNotFoundException;
-use Trailmind\User\UserRepository;
 use League\OAuth2\Server\Entities\ClientEntityInterface;
 use League\OAuth2\Server\Entities\UserEntityInterface;
 use League\OAuth2\Server\Repositories\UserRepositoryInterface;
+use Trailmind\User\Exception\UserNotFoundException;
+use Trailmind\User\UserRepository;
 
 class OauthUserRepository implements UserRepositoryInterface
 {
@@ -14,9 +14,6 @@ class OauthUserRepository implements UserRepositoryInterface
         private UserRepository $userRepository
     ) {}
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUserEntityByUserCredentials(
         $username,
         $password,
@@ -28,7 +25,7 @@ class OauthUserRepository implements UserRepositoryInterface
         } catch (UserNotFoundException $unfe) {
             return null;
         }
-        
+
         return new User($user->getId());
     }
 }

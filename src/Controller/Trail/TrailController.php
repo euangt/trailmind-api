@@ -16,10 +16,16 @@ class TrailController
 
     #[Route('/v1.0/trail/{trail_id}', methods: ['GET'], name: 'api_v1.0_view_trail')]
     public function getTrailAction(
-        #[CustomisableValueResolver('entity', false, ['class' => Trail::class, 'mapping' => ['trail_id' => 'id']])] $trail,
+        #[CustomisableValueResolver('entity', false, [
+            'class' => Trail::class,
+            'mapping' => [
+                'trail_id' => 'id',
+            ],
+        ])]
+        $trail,
     ): Success {
         return $this->trailBuilder
-                ->setContext('v1.0_view_trail')
-                ->build($trail);
+            ->setContext('v1.0_view_trail')
+            ->build($trail);
     }
 }

@@ -13,9 +13,6 @@ abstract class EntityBuilder
      */
     protected $dto;
 
-    /**
-     * @var array
-     */
     protected array $decorators = [];
 
     /**
@@ -28,36 +25,23 @@ abstract class EntityBuilder
         $this->decorators = [];
     }
 
-    /**
-     * @param mixed $initialisable
-     * 
-     * @return EntityDto
-     */
     public function build(mixed $initialisable): EntityDto
     {
         return $this->initialise(static::verifyEntity($initialisable))
-                    ->decorate()
-                    ->render();
+            ->decorate()
+            ->render();
     }
 
     /**
      * @param mixed $initialisable
-     *
-     * @return self
      */
     abstract protected function initialise($initialisable): self;
 
-    /**
-     * @return self
-     */
     protected function decorate(): self
     {
         return $this;
     }
 
-    /**
-     * @return EntityDto
-     */
     protected function render(): EntityDto
     {
         return $this->dto;
@@ -66,24 +50,17 @@ abstract class EntityBuilder
     /**
      * @param mixed $initialisable
      *
-     * @return mixed
-     *
      * @throws UnexpectedValueException
      */
     protected function verifyEntity($initialisable): mixed
     {
-        if (!is_a($initialisable, static::EXPECTED_CLASS)) {
+        if (! is_a($initialisable, static::EXPECTED_CLASS)) {
             throw new \UnexpectedValueException("Value passed to builder was not a valid instance of " . static::EXPECTED_CLASS);
         }
 
         return $initialisable;
     }
 
-    /**
-     * @param string $context
-     *
-     * @return self
-     */
     public function setContext(string $context): self
     {
         $this->context = $context;

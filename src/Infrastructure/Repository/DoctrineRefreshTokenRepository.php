@@ -2,9 +2,9 @@
 
 namespace Infrastructure\Repository;
 
-use Doctrine\Persistence\ObjectRepository;
 use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ObjectRepository;
 use Trailmind\Access\AccessToken;
 use Trailmind\Access\Exception\RefreshTokenNotFoundException;
 use Trailmind\Access\RefreshToken;
@@ -13,6 +13,7 @@ use Trailmind\Access\RefreshTokenRepository;
 final class DoctrineRefreshTokenRepository implements RefreshTokenRepository
 {
     private const ENTITY = RefreshToken::class;
+
     /**
      * @var ObjectRepository
      */
@@ -24,13 +25,12 @@ final class DoctrineRefreshTokenRepository implements RefreshTokenRepository
         $this->repository = $this->entityManager->getRepository(self::ENTITY);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findOneById(string $id): ?RefreshToken
     {
         try {
-            $refreshToken = $this->repository->findOneBy(['id' => $id]);
+            $refreshToken = $this->repository->findOneBy([
+                'id' => $id,
+            ]);
         } catch (ConversionException $ce) {
             $refreshToken = null;
         }
@@ -42,12 +42,11 @@ final class DoctrineRefreshTokenRepository implements RefreshTokenRepository
         return $refreshToken;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findOneByAccessToken(AccessToken $accessToken): ?RefreshToken
     {
-        $refreshToken = $this->repository->findOneBy(['accessToken' => $accessToken]);
+        $refreshToken = $this->repository->findOneBy([
+            'accessToken' => $accessToken,
+        ]);
 
         if (is_null($refreshToken)) {
             throw new RefreshTokenNotFoundException();

@@ -26,11 +26,18 @@ class AuthenticateController
 
     #[Route('/v1.0/authenticate', methods: ['POST'], name: 'api_v1.0_authenticate')]
     public function postAuthenticateAction(
-        #[MapRequestPayload(acceptFormat: 'json')] AuthenticatingUser $authenticatingUser,
-        #[CustomisableValueResolver('entity', false, ['class' => User::class, 'mapping' => ['email' => 'email']])] $user,
+        #[MapRequestPayload(acceptFormat: 'json')]
+        AuthenticatingUser $authenticatingUser,
+        #[CustomisableValueResolver('entity', false, [
+            'class' => User::class,
+            'mapping' => [
+                'email' => 'email',
+            ],
+        ])]
+        $user,
         Request $request,
     ): Success {
-        if (!$this->passwordVerifier->verifyPassword($user, $authenticatingUser->password)) {
+        if (! $this->passwordVerifier->verifyPassword($user, $authenticatingUser->password)) {
             throw new UnauthorizedHttpException('Invalid credentials');
         }
 
@@ -41,7 +48,7 @@ class AuthenticateController
         }
 
         return $this->accessTokenBuilder
-                ->setContext('v1.0_authenticate')
-                ->build($accessToken);
+            ->setContext('v1.0_authenticate')
+            ->build($accessToken);
     }
 }

@@ -8,9 +8,6 @@ use Symfony\Component\HttpKernel\Event\ViewEvent;
 
 class JsonableViewListener
 {
-    /**
-     * @param ViewEvent $event
-     */
     public function onKernelView(ViewEvent $event)
     {
         $response = $event->getControllerResult();

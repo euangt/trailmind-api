@@ -8,9 +8,6 @@ use League\OAuth2\Server\Repositories\ScopeRepositoryInterface;
 
 class OauthScopeRepository implements ScopeRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getScopeEntityByIdentifier($identifier): ?ScopeEntityInterface
     {
         if (Scope::hasScope($identifier)) {
@@ -19,9 +16,6 @@ class OauthScopeRepository implements ScopeRepositoryInterface
         return null;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function finalizeScopes(
         array $scopes,
         string $grantType,

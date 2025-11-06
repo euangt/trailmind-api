@@ -9,9 +9,6 @@ class Success extends EntityDto
      */
     private $hideKeys = false;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getStatusCode()
     {
         return 200;
@@ -22,9 +19,6 @@ class Success extends EntityDto
         $this->hideKeys = true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function jsonSerialize(): mixed
     {
         if ($this->hideKeys) {

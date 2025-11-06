@@ -13,10 +13,6 @@ class CoreValueResolver
 {
     /**
      * Get the options from the customisable value resolver
-     * 
-     * @param ArgumentMetadata $argument
-     * 
-     * @return array
      */
     protected function getOptions(ArgumentMetadata $argument): array
     {
@@ -29,10 +25,6 @@ class CoreValueResolver
 
     /**
      * Determine if this value can have a null value returned
-     *
-     * @param array $options
-     *
-     * @return bool
      */
     protected function isNullable(array $options): bool
     {
@@ -41,10 +33,6 @@ class CoreValueResolver
 
     /**
      * Determine if this value can have a default value returned
-     *
-     * @param array $options
-     *
-     * @return bool
      */
     protected function hasDefaultValue(array $options): bool
     {
@@ -53,10 +41,6 @@ class CoreValueResolver
 
     /**
      * Get the default value that should be returned if no value is found
-     *
-     * @param array $options
-     *
-     * @return mixed
      */
     protected function getDefaultValue(array $options): mixed
     {
@@ -65,22 +49,14 @@ class CoreValueResolver
 
     /**
      * Determine if there is a specific key that we are looking for in the request
-     * 
-     * @param array $options
-     * 
-     * @return bool
      */
     protected function hasRequestKey(array $options): bool
     {
-        return array_key_exists('key', $options) && !is_null($options['key']);
+        return array_key_exists('key', $options) && ! is_null($options['key']);
     }
 
     /**
      * Get the key that we are looking for in the request
-     * 
-     * @param array $options
-     * 
-     * @return string
      */
     protected function getRequestKey(array $options): string
     {
@@ -89,10 +65,6 @@ class CoreValueResolver
 
     /**
      * Determine the argument name to query the request with
-     * 
-     * @param ArgumentMetadata $argument
-     * 
-     * @return string
      */
     protected function determineArgumentName(ArgumentMetadata $argument): string
     {
@@ -105,10 +77,6 @@ class CoreValueResolver
 
     /**
      * Determine if a negative value is allowed
-     * 
-     * @param array $options
-     * 
-     * @return bool
      */
     protected function allowsNegative(array $options): bool
     {

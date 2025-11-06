@@ -12,11 +12,6 @@ abstract class TrailEntityDecorator extends EntityDecorator
      */
     protected $trail;
 
-    /**
-     * @param Trail $trail
-     * 
-     * @return self
-     */
     public function withTrail(Trail $trail): self
     {
         $this->trail = $trail;

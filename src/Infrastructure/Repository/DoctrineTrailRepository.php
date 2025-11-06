@@ -23,13 +23,12 @@ class DoctrineTrailRepository implements TrailRepository
         $this->repository = $this->entityManager->getRepository(self::ENTITY);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function findOneById(string $id): Trail
     {
         try {
-            $trail = $this->repository->findOneBy(['id' => $id]);
+            $trail = $this->repository->findOneBy([
+                'id' => $id,
+            ]);
         } catch (ConversionException $ce) {
             $trail = null;
         }
@@ -41,9 +40,6 @@ class DoctrineTrailRepository implements TrailRepository
         return $trail;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function save(Trail $trail): void
     {
         $this->entityManager->persist($trail);

@@ -2,9 +2,9 @@
 
 namespace Infrastructure\Repository;
 
-use Doctrine\Persistence\ObjectRepository;
 use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ObjectRepository;
 use Trailmind\Access\Client;
 use Trailmind\Access\ClientRepository;
 use Trailmind\Access\Exception\ClientNotFoundException;
@@ -24,13 +24,13 @@ final class DoctrineClientRepository implements ClientRepository
         $this->repository = $this->entityManager->getRepository(self::ENTITY);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findActiveById(string $id): ?Client
     {
         try {
-            $client = $this->repository->findOneBy(['id' => $id, 'active' => true]);
+            $client = $this->repository->findOneBy([
+                'id' => $id,
+                'active' => true,
+            ]);
         } catch (ConversionException $ce) {
             $client = null;
         }
@@ -42,12 +42,12 @@ final class DoctrineClientRepository implements ClientRepository
         return $client;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findOneByIdAndSecret(string $id, string $secret): ?Client
     {
-        $client = $this->repository->findOneBy(['id' => $id, 'secret' => $secret]);
+        $client = $this->repository->findOneBy([
+            'id' => $id,
+            'secret' => $secret,
+        ]);
 
         if (is_null($client)) {
             throw new ClientNotFoundException();

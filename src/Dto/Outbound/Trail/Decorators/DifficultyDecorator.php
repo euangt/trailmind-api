@@ -7,14 +7,11 @@ use Dto\Outbound\EntityDto;
 class DifficultyDecorator extends TrailEntityDecorator
 {
     protected const CONTEXTS = [
-        'v1.0_view_trail'
+        'v1.0_view_trail',
     ];
 
-    /**
-     * {@inheritDoc}
-     */
     public function decorate(
-        EntityDto $entityDto, 
+        EntityDto $entityDto,
         string $context
     ): EntityDto
     {

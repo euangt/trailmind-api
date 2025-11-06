@@ -8,8 +8,8 @@ use League\OAuth2\Server\Exception\OAuthServerException;
 use League\OAuth2\Server\Grant\AbstractGrant;
 use League\OAuth2\Server\Grant\PasswordGrant;
 use League\OAuth2\Server\Grant\RefreshTokenGrant;
-use Nyholm\Psr7\Response as Psr7Response;
 use Nyholm\Psr7\Factory\Psr17Factory;
+use Nyholm\Psr7\Response as Psr7Response;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory;
@@ -19,6 +19,7 @@ use Trailmind\AuthenticationService\Exception\UnableToCreateAccessTokenException
 class OpaqueTokenGranter implements TokenGranter
 {
     private const ACCESS_TOKEN_TTL = 'P1D';
+
     private const REFRESH_TOKEN_TTL = 'P1M';
 
     public function __construct(
@@ -27,17 +28,11 @@ class OpaqueTokenGranter implements TokenGranter
         private RefreshTokenGrant $refreshTokenGrant,
     ) {}
 
-    /**
-     * @inheritdoc
-     */
     public function grantAccessToken(Request $request, array $inputParams): AccessToken
     {
         return $this->handleGrant($request, $inputParams, $this->passwordGrant, self::ACCESS_TOKEN_TTL, self::REFRESH_TOKEN_TTL);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function refreshAccessToken(Request $request, array $inputParams): AccessToken
     {
         return $this->handleGrant($request, $inputParams, $this->refreshTokenGrant, self::ACCESS_TOKEN_TTL, self::REFRESH_TOKEN_TTL);

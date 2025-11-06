@@ -1,14 +1,15 @@
 <?php
+
 namespace Infrastructure\Oauth2Server\Bridge;
 
+use League\OAuth2\Server\Entities\AccessTokenEntityInterface;
+use League\OAuth2\Server\Entities\ClientEntityInterface;
+use League\OAuth2\Server\Repositories\AccessTokenRepositoryInterface;
 use Trailmind\Access\AccessToken as TrailmindAccessToken;
 use Trailmind\Access\AccessTokenRepository;
 use Trailmind\Access\ClientRepository;
 use Trailmind\Access\Exception\AccessTokenNotFoundException;
 use Trailmind\User\UserRepository;
-use League\OAuth2\Server\Entities\AccessTokenEntityInterface;
-use League\OAuth2\Server\Entities\ClientEntityInterface;
-use League\OAuth2\Server\Repositories\AccessTokenRepositoryInterface;
 
 class OauthAccessTokenRepository implements AccessTokenRepositoryInterface
 {
@@ -18,9 +19,6 @@ class OauthAccessTokenRepository implements AccessTokenRepositoryInterface
         private ClientRepository $clientRepository
     ) {}
 
-    /**
-     * {@inheritdoc}
-     */
     public function getNewToken(ClientEntityInterface $clientEntity, array $scopes, $userIdentifier = null): AccessTokenEntityInterface
     {
         $accessToken = new AccessToken($userIdentifier, $scopes);
@@ -29,9 +27,6 @@ class OauthAccessTokenRepository implements AccessTokenRepositoryInterface
         return $accessToken;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function persistNewAccessToken(AccessTokenEntityInterface $accessTokenEntity): void
     {
         $user = $this->userRepository->findOneById($accessTokenEntity->getUserIdentifier());
@@ -50,9 +45,6 @@ class OauthAccessTokenRepository implements AccessTokenRepositoryInterface
         $this->accessTokenRepository->save($accessToken);
     }
 
-    /**
-     * @param array $scopes
-     */
     private function scopesToArray(array $scopes): array
     {
         return array_map(function ($scope) {
@@ -60,9 +52,6 @@ class OauthAccessTokenRepository implements AccessTokenRepositoryInterface
         }, $scopes);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function revokeAccessToken($tokenId): void
     {
         try {
@@ -75,9 +64,6 @@ class OauthAccessTokenRepository implements AccessTokenRepositoryInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isAccessTokenRevoked(string $tokenId): bool
     {
         try {

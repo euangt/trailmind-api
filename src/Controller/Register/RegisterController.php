@@ -19,7 +19,8 @@ class RegisterController
 
     #[Route('/v1.0/register', methods: ['POST'], name: 'api_v1.0_register')]
     public function postRegisterAction(
-        #[MapRequestPayload(acceptFormat: 'json')] RegisteringUser $registeringUser
+        #[MapRequestPayload(acceptFormat: 'json')]
+        RegisteringUser $registeringUser
     ): NoContent {
         $user = new User(
             $registeringUser->email,

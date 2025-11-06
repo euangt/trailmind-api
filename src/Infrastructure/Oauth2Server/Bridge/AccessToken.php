@@ -9,13 +9,8 @@ use League\OAuth2\Server\Entities\Traits\TokenEntityTrait;
 
 class AccessToken implements AccessTokenEntityInterface
 {
-    use AccessTokenTrait, EntityTrait, TokenEntityTrait;
+    use AccessTokenTrait; use EntityTrait; use TokenEntityTrait;
 
-    /**
-     * AccessToken constructor.
-     * @param string $userIdentifier
-     * @param array $scopes
-     */
     public function __construct(string $userIdentifier, array $scopes = [])
     {
         $this->setUserIdentifier($userIdentifier);

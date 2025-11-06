@@ -6,10 +6,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class AuthenticatingUser
 {
-    /**
-     * @param string $email
-     * @param string $password
-     */
     public function __construct(
         #[Assert\NotBlank]
         #[Assert\Email]
