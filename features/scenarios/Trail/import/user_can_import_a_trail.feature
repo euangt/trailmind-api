@@ -13,7 +13,7 @@ Feature: User can import a trail
     Scenario: User can import a trail
         Given there is a GPX file for 'offas_dyke.gpx'
         When I request to import the 'offas_dyke.gpx' GPX file for "Offas Dyke Trail"
-        Then the platform should respond that the request was successful without additional data
+        Then the platform should respond that the trail was created
         And the "Offas Dyke Trail" should have trail points attached to it
         And the "Offas Dyke Trail" should have the start point
             | Latitude    | Longitude    | Elevation |

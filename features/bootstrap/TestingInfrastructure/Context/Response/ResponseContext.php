@@ -49,6 +49,16 @@ class ResponseContext extends RawMinkContext
         }
     }
 
+    #[Then('the platform should respond that the trail was created')]
+    public function thePlatformShouldRespondThatTheTrailWasCreated(): void
+    {
+        $receivedStatusCode = $this->getSession()->getStatusCode();
+        $this->generateStacktraceFile($receivedStatusCode);
+        if ($receivedStatusCode !== 201) {
+            throw new \UnexpectedValueException("Unexpected Status Code: " . $receivedStatusCode . ' expected: 204');
+        }
+    }
+
     #[Then('the platform should respond that the request was successful without additional data')]
     public function thePlatformShouldRespondThatTheRequestWasSuccessfulWithoutAdditionalData(): void
     {
