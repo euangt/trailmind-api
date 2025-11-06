@@ -93,17 +93,17 @@ class Client implements UserInterface
     /**
      * @return boolean
      */
-    public function requiresVerification()
+    public function requiresVerification(): bool
     {
         return $this->requiresVerification;
     }
 
-    public function setRequiresVerification(bool $requiresVerification)
+    public function setRequiresVerification(bool $requiresVerification): void
     {
         $this->requiresVerification = $requiresVerification;
     }
 
-    public function addRole(string $role)
+    public function addRole(string $role): void
     {
         $this->roles[] = $role;
     }
@@ -113,17 +113,17 @@ class Client implements UserInterface
         return $this->roles;
     }
 
-    public function getPassword()
+    public function getPassword(): ?string
     {
         return $this->secret;
     }
 
-    public function getSalt()
+    public function getSalt(): ?string
     {
         return null;
     }
 
-    public function getUsername()
+    public function getUsername(): string
     {
         return $this->name;
     }

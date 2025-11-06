@@ -37,10 +37,7 @@ class RefreshToken
         return $this->expiresAt;
     }
 
-    /**
-     * @return string
-     */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
