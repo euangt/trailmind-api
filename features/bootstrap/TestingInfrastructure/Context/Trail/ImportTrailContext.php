@@ -60,10 +60,10 @@ class ImportTrailContext implements Context
         assert(file_exists($path));
     }
 
-    #[When('I request to import the :filepath GPX file for :trail')]
-    public function iRequestToImportTheGpxFileFor($filepath, $trail): void
+    #[When('I request to import the :filename GPX file for :trail')]
+    public function iRequestToImportTheGpxFileFor($filename, $trail): void
     {
-        $body = ['filepath'=>$filepath];
+        $body = ['filename'=>$filename];
 
         $this->requestContext->makeVersionedJsonRequest(
             'POST',
