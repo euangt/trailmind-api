@@ -9,7 +9,8 @@ class Trail
     public function __construct(
         private string $name,
         private string $difficulty,
-        private float $length
+        private float $length,
+        private array $trailPoints = []
     ) {}
 
     public function getId(): ?string {
@@ -26,5 +27,17 @@ class Trail
 
     public function getLength(): float { 
         return $this->length; 
+    }
+
+    public function getTrailPoints(): array {
+        return $this->trailPoints;
+    }
+
+    public function addTrailPoint(TrailPoint $trailPoint): void {
+        $this->trailPoints[] = $trailPoint;
+    }
+
+    public function setTrailPoints(array $trailPoints): void {
+        $this->trailPoints = $trailPoints;
     }
 }
