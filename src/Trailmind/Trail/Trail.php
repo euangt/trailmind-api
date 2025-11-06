@@ -35,7 +35,9 @@ class Trail
     }
 
     public function getTrailPoints(): array {
-        return $this->trailPoints;
+        return $this->trailPoints instanceof PersistentCollection
+            ? $this->trailPoints->toArray()
+            : $this->trailPoints;
     }
 
     public function addTrailPoint(TrailPoint $trailPoint): void {

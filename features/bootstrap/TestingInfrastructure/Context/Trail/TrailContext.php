@@ -80,24 +80,36 @@ class TrailContext implements Context
     #[Then('the :trail should have trail points attached to it')]
     public function theShouldHaveTrailPointsAttachedToIt($trail): void
     {
-        throw new PendingException();
+        assert(!empty($trail->getTrailPoints()));
     }
 
     #[Then('the :trail should have the start point')]
     public function theShouldHaveTheStartPoint($trail, TableNode $table): void
     {
-        throw new PendingException();
+        $expectedStartPoint = $table->getColumnsHash()[0];
+        $startPoint = $trail->getStartPoint();
+
+        assert($startPoint, 'Trail does not have a start point set');
+        assert($startPoint->getLatitude() === (float)$expectedStartPoint['Latitude']);
+        assert($startPoint->getLongitude() === (float)$expectedStartPoint['Longitude']);
+        assert($startPoint->getElevation() === (float)$expectedStartPoint['Elevation']);
     }
 
     #[Then('the :trail should have the end point')]
     public function theShouldHaveTheEndPoint($trail, TableNode $table): void
     {
-        throw new PendingException();
+        $expectedEndPoint = $table->getColumnsHash()[0];
+        $endPoint = $trail->getEndPoint();
+
+        assert($endPoint, 'Trail does not have an end point set');
+        assert($endPoint->getLatitude() === (float)$expectedEndPoint['Latitude']);
+        assert($endPoint->getLongitude() === (float)$expectedEndPoint['Longitude']);
+        assert($endPoint->getElevation() === (float)$expectedEndPoint['Elevation']);
     }
 
     #[Then('the :trail should have a route set')]
     public function theShouldHaveARouteSet($trail): void
     {
-        throw new PendingException();
+        assert($trail->getRoute(), 'Trail does not have a route set');
     }
 }
