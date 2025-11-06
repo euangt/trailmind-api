@@ -80,6 +80,7 @@ class TrailContext implements Context
     #[Then('the :trail should have trail points attached to it')]
     public function theShouldHaveTrailPointsAttachedToIt($trail): void
     {
+        $trail = $this->services->getTrailRepository()->findOneByNameUncached($trail->getName());
         assert(!empty($trail->getTrailPoints()));
     }
 

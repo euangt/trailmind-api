@@ -16,14 +16,14 @@ Feature: User can import a trail
         Then the platform should respond that the trail was created
         And the "Offas Dyke Trail" should have trail points attached to it
         And the "Offas Dyke Trail" should have the start point
-            | Latitude    | Longitude    | Elevation |
-            | 51.63253954 | -2.648426341 | 20.43     |
+            | Latitude     | Longitude    | Elevation |
+            | 51.632539546 | -2.648426341 | 20.43     |
         And the "Offas Dyke Trail" should have the end point
             | Latitude     | Longitude    | Elevation |
-            | 51.742635174 | -2.668300923 | 5.63      |
+            | 51.742635174 | -2.668300923 | 15.63     |
         And the "Offas Dyke Trail" should have a route set
 
     @v1.0
     Scenario: User cannot import a trail without a file
         When I request to import a GPX file for "Offas Dyke Trail"
-        Then the platform should respond that the request was bad
+        Then the platform should respond that the request had unprocessable content

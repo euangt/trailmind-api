@@ -18,7 +18,7 @@ class DoctrineTrailRepository implements TrailRepository
     protected $repository;
 
     public function __construct(
-        private EntityManagerInterface $entityManager
+        protected EntityManagerInterface $entityManager
     ) {
         $this->repository = $this->entityManager->getRepository(self::ENTITY);
     }
