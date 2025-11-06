@@ -10,6 +10,7 @@ default:
       contexts:
         - TestingInfrastructure\Context\Authentication\AuthenticateContext
         - TestingInfrastructure\Context\Feature\FeatureContext
+        - TestingInfrastructure\Context\Trail\ImportTrailContext
         - TestingInfrastructure\Context\Trail\TrailContext
         - TestingInfrastructure\Context\Register\RegisterContext
         - TestingInfrastructure\Context\Request\RequestContext

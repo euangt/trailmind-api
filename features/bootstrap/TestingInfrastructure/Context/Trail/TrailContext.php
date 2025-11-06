@@ -76,4 +76,28 @@ class TrailContext implements Context
         assert($responseTrail->difficulty === $expectedTrail['Difficulty']);
         assert($responseTrail->length === (float)$expectedTrail['Length']);
     }
+
+    #[Then('the :trail should have trail points attached to it')]
+    public function theShouldHaveTrailPointsAttachedToIt($trail): void
+    {
+        throw new PendingException();
+    }
+
+    #[Then('the :trail should have the start point')]
+    public function theShouldHaveTheStartPoint($trail, TableNode $table): void
+    {
+        throw new PendingException();
+    }
+
+    #[Then('the :trail should have the end point')]
+    public function theShouldHaveTheEndPoint($trail, TableNode $table): void
+    {
+        throw new PendingException();
+    }
+
+    #[Then('the :trail should have a route set')]
+    public function theShouldHaveARouteSet($trail): void
+    {
+        throw new PendingException();
+    }
 }

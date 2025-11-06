@@ -7,6 +7,11 @@ services:
         resource: '../features/bootstrap/TestingInfrastructure/*'
 
     #Contexts
+    TestingInfrastructure\Context\Trail\ImportTrailContext:
+        public: true
+        arguments:
+            - '@kernel'
+
     TestingInfrastructure\Context\Trail\TrailContext:
         public: true
         arguments:

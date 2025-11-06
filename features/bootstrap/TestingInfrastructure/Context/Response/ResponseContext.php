@@ -45,7 +45,7 @@ class ResponseContext extends RawMinkContext
         $receivedStatusCode = $this->getSession()->getStatusCode();
         $this->generateStacktraceFile($receivedStatusCode);
         if ($receivedStatusCode !== 200) {
-            throw new \UnexpectedValueException("Unexpected Status Code: " . $receivedStatusCode . 'expected: 200');
+            throw new \UnexpectedValueException("Unexpected Status Code: " . $receivedStatusCode . ' expected: 200');
         }
     }
 
@@ -55,7 +55,7 @@ class ResponseContext extends RawMinkContext
         $receivedStatusCode = $this->getSession()->getStatusCode();
         $this->generateStacktraceFile($receivedStatusCode);
         if ($receivedStatusCode !== 204) {
-            throw new \UnexpectedValueException("Unexpected Status Code: " . $receivedStatusCode . 'expected: 204');
+            throw new \UnexpectedValueException("Unexpected Status Code: " . $receivedStatusCode . ' expected: 204');
         }
     }
 
@@ -65,7 +65,7 @@ class ResponseContext extends RawMinkContext
         $receivedStatusCode = $this->getSession()->getStatusCode();
         $this->generateStacktraceFile($receivedStatusCode);
         if ($receivedStatusCode !== 400) {
-            throw new \UnexpectedValueException("Unexpected Status Code: " . $receivedStatusCode . 'expected: 400');
+            throw new \UnexpectedValueException("Unexpected Status Code: " . $receivedStatusCode . ' expected: 400');
         }
     }
 
@@ -75,7 +75,7 @@ class ResponseContext extends RawMinkContext
         $receivedStatusCode = $this->getSession()->getStatusCode();
         $this->generateStacktraceFile($receivedStatusCode);
         if ($receivedStatusCode !== 401) {
-            throw new \UnexpectedValueException("Unexpected Status Code: " . $receivedStatusCode . 'expected: 401');
+            throw new \UnexpectedValueException("Unexpected Status Code: " . $receivedStatusCode . ' expected: 401');
         }
     }
 
@@ -85,7 +85,7 @@ class ResponseContext extends RawMinkContext
         $receivedStatusCode = $this->getSession()->getStatusCode();
         $this->generateStacktraceFile($receivedStatusCode);
         if ($receivedStatusCode !== 422) {
-            throw new \UnexpectedValueException("Unexpected Status Code: " . $receivedStatusCode . 'expected: 422');
+            throw new \UnexpectedValueException("Unexpected Status Code: " . $receivedStatusCode . ' expected: 422');
         }
     }
 

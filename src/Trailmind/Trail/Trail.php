@@ -2,6 +2,8 @@
 
 namespace Trailmind\Trail;
 
+use Doctrine\ORM\PersistentCollection;
+
 class Trail
 {
     private $id;
@@ -13,7 +15,7 @@ class Trail
         private string $name,
         private string $difficulty,
         private float $length,
-        private array $trailPoints = []
+        private array|PersistentCollection $trailPoints = []
     ) {}
 
     public function getId(): ?string {
