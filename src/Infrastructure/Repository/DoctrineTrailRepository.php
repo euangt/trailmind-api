@@ -40,6 +40,11 @@ class DoctrineTrailRepository implements TrailRepository
         return $trail;
     }
 
+    public function findAll(): array
+    {
+        return $this->repository->findAll();
+    }
+
     public function save(Trail $trail): void
     {
         $this->entityManager->persist($trail);

@@ -26,6 +26,16 @@ class DoctrineTrailRepositorySpec extends ObjectBehavior
         $this->findOneById('12345')->shouldReturn($trail);
     }
 
+    function it_should_return_all_Trails(
+        EntityRepository $repository,
+        Trail $trail1,
+        Trail $trail2
+    ) {
+        $repository->findAll()->willReturn([$trail1, $trail2]);
+
+        $this->findAll()->shouldReturn([$trail1, $trail2]);
+    }
+
     function it_should_save_a_Trail(
         EntityManagerInterface $entityManager,
         Trail $trail
