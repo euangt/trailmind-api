@@ -66,6 +66,46 @@ class TrailContext implements Context
         );
     }
 
+    #[When('I request details of all trails in the system')]
+    public function iRequestDetailsOfAllTrailsInTheSystem(): void
+    {
+        $this->requestContext->makeVersionedJsonRequest(
+            'GET',
+            '/trails'
+        );
+    }
+
+    #[Then('I should see following trails:')]
+    public function iShouldSeeFollowingTrails(TableNode $table): void
+    {
+        $expectedTrails = $table->getColumnsHash();
+        $responseTrails = $this->responseContext->getResponseAsObject();
+
+        assert(count($responseTrails) === count($expectedTrails), 'Number of trails in response does not match expected');
+
+        $returnedTrails = array_map(
+            fn ($trail) => [
+                'Name' => $trail->name,
+                'Difficulty' => $trail->difficulty,
+                'Length' => $trail->length,
+            ],
+            $responseTrails
+        );
+
+        foreach ($expectedTrails as $expectedTrail) {
+            assert(
+                in_array(
+                    [
+                        'Name' => $expectedTrail['Name'],
+                        'Difficulty' => $expectedTrail['Difficulty'],
+                        'Length' => (float)$expectedTrail['Length'],
+                    ],
+                    $returnedTrails,
+                )
+            );
+        }
+    }
+
     #[Then('I should see the trail information:')]
     public function iShouldSeeTheTrailInformation(TableNode $table): void
     {
