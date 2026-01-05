@@ -8,6 +8,7 @@ class LengthDecorator extends TrailEntityDecorator
 {
     protected const CONTEXTS = [
         'v1.0_view_trail',
+        'v1.0_view_trails',
     ];
 
     public function decorate(
