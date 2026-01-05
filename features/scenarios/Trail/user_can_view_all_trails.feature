@@ -4,7 +4,7 @@ Feature: User can view all trails
     I want to be able to view a list of all trails
 
     Background:
-        Given there is the following trail:
+        Given there are the following trail:
             | Name         | Difficulty | Length |
             | Base Trail   | Easy       | 3.1    |
             | Second Trail | Moderate   | 5.4    |

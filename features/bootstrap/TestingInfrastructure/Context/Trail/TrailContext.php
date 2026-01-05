@@ -55,6 +55,22 @@ class TrailContext implements Context
         $this->services->getTrailRepository()->save($trail);
     }
 
+    #[Given('there are the following trail:')]
+    public function thereAreTheFollowingTrail(TableNode $table): void
+    {
+        $trailData = $table->getColumnsHash();
+
+        foreach ($trailData as $data) {
+            $trail = new Trail(
+                $data['Name'],
+                $data['Difficulty'],
+                (float) $data['Length']
+            );
+
+            $this->services->getTrailRepository()->save($trail);
+        }
+    }
+
     #[When('I request details of the trail :trailName')]
     public function iRequestDetailsOfTheTrail($trailName): void
     {
@@ -79,7 +95,7 @@ class TrailContext implements Context
     public function iShouldSeeFollowingTrails(TableNode $table): void
     {
         $expectedTrails = $table->getColumnsHash();
-        $responseTrails = $this->responseContext->getResponseAsObject();
+        $responseTrails = $this->responseContext->getResponseAsObject()->trails;
 
         assert(count($responseTrails) === count($expectedTrails), 'Number of trails in response does not match expected');
 
