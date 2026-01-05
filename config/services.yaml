@@ -5,6 +5,12 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
 
+imports:
+  - { resource: services/imports.yaml }
+  - { resource: services/oauth.yaml }
+  - { resource: services/repositories.yaml }
+  - { resource: services/security.yaml }
+
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -36,8 +42,3 @@ services:
     Application\EventListener\JsonableViewListener:
         tags:
             - { name: kernel.event_listener, event: kernel.view }
-
-imports:
-  - { resource: services/oauth.yaml }
-  - { resource: services/repositories.yaml }
-  - { resource: services/security.yaml }

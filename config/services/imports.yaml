@@ -1,0 +1,3 @@
+services:
+  Trailmind\TrailService\TrailPointManager\TrailPointLoader\TrailPointLoader:
+        public: true
