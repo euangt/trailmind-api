@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Dto\Inbound\User;
+namespace spec\Application\Dto\Inbound\User;
 
 use PhpSpec\ObjectBehavior;
 

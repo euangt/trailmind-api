@@ -2,7 +2,7 @@
 
 namespace spec\Controller\Trail;
 
-use Dto\Inbound\File\Filename;
+use Application\Dto\Inbound\File\Filename;
 use Dto\Outbound\Created;
 use PhpSpec\ObjectBehavior;
 use SimpleXMLElement;

@@ -3,7 +3,7 @@
 namespace Controller\Trail;
 
 use Application\ValueResolver\CustomisableValueResolver;
-use Dto\Inbound\File\Filename;
+use Application\Dto\Inbound\File\Filename;
 use Dto\Outbound\Created;
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;

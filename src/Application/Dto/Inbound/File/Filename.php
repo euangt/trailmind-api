@@ -1,6 +1,6 @@
 <?php
 
-namespace Dto\Inbound\File;
+namespace Application\Dto\Inbound\File;
 
 use Symfony\Component\Validator\Constraints as Assert;
 

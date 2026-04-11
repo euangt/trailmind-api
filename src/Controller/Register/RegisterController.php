@@ -2,7 +2,7 @@
 
 namespace Controller\Register;
 
-use Dto\Inbound\User\RegisteringUser;
+use Application\Dto\Inbound\User\RegisteringUser;
 use Dto\Outbound\NoContent;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;

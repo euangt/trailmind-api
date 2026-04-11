@@ -2,7 +2,7 @@
 
 namespace spec\Controller\Register;
 
-use Dto\Inbound\User\RegisteringUser;
+use Application\Dto\Inbound\User\RegisteringUser;
 use Dto\Outbound\NoContent;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;

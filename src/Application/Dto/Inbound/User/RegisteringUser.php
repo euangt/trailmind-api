@@ -1,16 +1,20 @@
 <?php
 
-namespace Dto\Inbound\User;
+namespace Application\Dto\Inbound\User;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class AuthenticatingUser
+class RegisteringUser
 {
     public function __construct(
+        #[Assert\NotBlank]
+        public string $name,
         #[Assert\NotBlank]
         #[Assert\Email]
         public string $email,
         #[Assert\NotBlank]
-        public string $password
+        public string $password,
+        #[Assert\NotBlank]
+        public string $username
     ) {}
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Dto\Inbound\File;
+namespace spec\Application\Dto\Inbound\File;
 
 use PhpSpec\ObjectBehavior;
 
