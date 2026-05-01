@@ -25,7 +25,7 @@ final class HomePageTest extends WebTestCase
         self::assertCount(3, $crawler->filter('.tm-timeline-entry'));
     }
 
-    public function testHomePageNavigationAndCallsToActionStayInternal(): void
+    public function testHomePageNavigationAndCallsToActionIncludeTrailCatalogue(): void
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/');
@@ -35,7 +35,7 @@ final class HomePageTest extends WebTestCase
         $navigationLinks = $crawler->filter('.tm-header nav a')->extract(['href']);
         $ctaLinks = $crawler->filter('.tm-hero-actions a')->extract(['href']);
 
-        self::assertSame(['#highlights', '#rhythm', '#outlook'], $navigationLinks);
-        self::assertSame(['#highlights', '#rhythm'], $ctaLinks);
+        self::assertSame(['/trails', '#highlights', '#rhythm', '#outlook'], $navigationLinks);
+        self::assertSame(['/trails', '#highlights'], $ctaLinks);
     }
 }

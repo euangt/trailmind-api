@@ -12,9 +12,13 @@ class HomePageSpec extends ObjectBehavior
         $this->shouldHaveType(HomePage::class);
     }
 
-    function it_exposes_internal_navigation_links()
+    function it_exposes_navigation_links_including_the_trail_catalogue()
     {
         $this->navigation()->shouldReturn([
+            [
+                'label' => 'Trails',
+                'href' => '/trails',
+            ],
             [
                 'label' => 'Highlights',
                 'href' => '#highlights',
@@ -58,6 +62,10 @@ class HomePageSpec extends ObjectBehavior
     {
         $this->toArray()->shouldReturn([
             'navigation' => [
+                [
+                    'label' => 'Trails',
+                    'href' => '/trails',
+                ],
                 [
                     'label' => 'Highlights',
                     'href' => '#highlights',

@@ -33,6 +33,10 @@ class HomePage
     {
         return [
             [
+                'label' => 'Trails',
+                'href' => '/trails',
+            ],
+            [
                 'label' => 'Highlights',
                 'href' => '#highlights',
             ],
