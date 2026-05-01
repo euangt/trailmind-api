@@ -1,8 +1,9 @@
 <?php
 
-namespace spec\Dto\Internal\Weather;
+namespace spec\Trailmind\WeatherService;
 
 use PhpSpec\ObjectBehavior;
+use Trailmind\WeatherService\Weather;
 
 class WeatherSpec extends ObjectBehavior
 {
@@ -18,6 +19,11 @@ class WeatherSpec extends ObjectBehavior
             65,
             'Sunny'
         );
+    }
+
+    function it_is_initializable()
+    {
+        $this->shouldHaveType(Weather::class);
     }
 
     function it_has_a_last_updated()

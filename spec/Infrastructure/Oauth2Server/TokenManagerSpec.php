@@ -2,7 +2,7 @@
 
 namespace spec\Infrastructure\Oauth2Server;
 
-use Dto\Internal\Authentication\AccessToken;
+use Application\Authentication\AccessToken;
 use Infrastructure\Oauth2Server\TokenGranter\TokenGranter;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,7 +39,7 @@ class TokenManagerSpec extends ObjectBehavior
             "client_secret"=>"client-secret",
             "scope"=>"*",
             "username"=>"user@example.com",
-            "password"=>""
+            "password"=>"authenticated"
         ];
 
         $tokenGranter->grantAccessToken($request, $inputParams)->willReturn($accessToken);

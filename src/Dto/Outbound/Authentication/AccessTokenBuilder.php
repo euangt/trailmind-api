@@ -2,7 +2,7 @@
 
 namespace Dto\Outbound\Authentication;
 
-use Dto\Internal\Authentication\AccessToken;
+use Application\Authentication\AccessToken;
 use Dto\Outbound\EntityBuilder;
 use Dto\Outbound\Success;
 

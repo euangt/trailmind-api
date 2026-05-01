@@ -99,10 +99,16 @@ class FeatureContext implements Context
     private static function populateClient()
     {
         // We need to define the client so that authentication will work
-        $client = new Client(AuthenticateContext::CLIENT_ID, 'Trailmind Insights');
+        $client = self::$manager->find(Client::class, AuthenticateContext::CLIENT_ID);
+
+        if (is_null($client)) {
+            $client = new Client(AuthenticateContext::CLIENT_ID, 'Trailmind Insights');
+            self::$manager->persist($client);
+        }
+
         $client->setSecret(AuthenticateContext::CLIENT_SECRET);
         $client->setRedirect("/");
-        self::save($client);
+        self::$manager->flush();
     }
 
     private static function runCommand($command, $args = []): string {

@@ -2,7 +2,7 @@
 
 namespace Infrastructure\Oauth2Server;
 
-use Dto\Internal\Authentication\AccessToken;
+use Application\Authentication\AccessToken;
 use Infrastructure\Oauth2Server\TokenGranter\TokenGranter;
 use Symfony\Component\HttpFoundation\Request;
 use Trailmind\User\User;
@@ -13,9 +13,6 @@ class TokenManager
         private TokenGranter $tokenGranter,
     ) {}
 
-    /**
-     * @return Token|null
-     */
     public function getAccessToken(Request $request, User $user): ?AccessToken
     {
         $inputParams = [

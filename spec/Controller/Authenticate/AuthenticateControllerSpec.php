@@ -2,8 +2,8 @@
 
 namespace spec\Controller\Authenticate;
 
+use Application\Authentication\AccessToken;
 use Application\Dto\Inbound\User\AuthenticatingUser;
-use Dto\Internal\Authentication\AccessToken;
 use Dto\Outbound\Authentication\AccessTokenBuilder;
 use Dto\Outbound\Success;
 use Infrastructure\Oauth2Server\TokenManager;

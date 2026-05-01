@@ -1,6 +1,6 @@
 <?php
 
-namespace Dto\Internal\Weather;
+namespace Trailmind\WeatherService;
 
 use Symfony\Component\Validator\Constraints as Assert;
 

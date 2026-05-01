@@ -1,7 +1,8 @@
 <?php
 
-namespace spec\Dto\Internal\Authentication;
+namespace spec\Application\Authentication;
 
+use Application\Authentication\AccessToken;
 use PhpSpec\ObjectBehavior;
 
 class AccessTokenSpec extends ObjectBehavior
@@ -13,7 +14,7 @@ class AccessTokenSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Dto\Internal\Authentication\AccessToken');
+        $this->shouldHaveType(AccessToken::class);
     }
 
     function it_has_an_access_token()

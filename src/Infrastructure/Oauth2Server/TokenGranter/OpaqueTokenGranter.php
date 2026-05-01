@@ -2,7 +2,7 @@
 
 namespace Infrastructure\Oauth2Server\TokenGranter;
 
-use Dto\Internal\Authentication\AccessToken;
+use Application\Authentication\AccessToken;
 use League\OAuth2\Server\AuthorizationServer;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use League\OAuth2\Server\Grant\AbstractGrant;
@@ -28,16 +28,25 @@ class OpaqueTokenGranter implements TokenGranter
         private RefreshTokenGrant $refreshTokenGrant,
     ) {}
 
+    /**
+     * @param array<string, string> $inputParams
+     */
     public function grantAccessToken(Request $request, array $inputParams): AccessToken
     {
         return $this->handleGrant($request, $inputParams, $this->passwordGrant, self::ACCESS_TOKEN_TTL, self::REFRESH_TOKEN_TTL);
     }
 
+    /**
+     * @param array<string, string> $inputParams
+     */
     public function refreshAccessToken(Request $request, array $inputParams): AccessToken
     {
         return $this->handleGrant($request, $inputParams, $this->refreshTokenGrant, self::ACCESS_TOKEN_TTL, self::REFRESH_TOKEN_TTL);
     }
 
+    /**
+     * @param array<string, string> $inputParams
+     */
     private function handleGrant(
         Request $request,
         array $inputParams,
@@ -56,6 +65,9 @@ class OpaqueTokenGranter implements TokenGranter
         });
     }
 
+    /**
+     * @param array<string, string> $inputParams
+     */
     private function convertRequest(Request $request, array $inputParams): ServerRequestInterface
     {
         $psr17Factory = new Psr17Factory();

@@ -2,7 +2,6 @@
 
 namespace Trailmind\WeatherService;
 
-use Dto\Internal\Weather\Weather;
 use Trailmind\WeatherService\Exception\UnableToAcquireWeatherException;
 
 interface WeatherAcquirer
