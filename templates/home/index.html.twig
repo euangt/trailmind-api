@@ -2,171 +2,84 @@
 
 {% block title %}Trailmind | Easygoing Trail Days{% endblock %}
 
+{% block body_class %}tm-root{% endblock %}
+
 {% block body %}
     <div class="landing-page relative overflow-hidden">
         <div class="hero-glow hero-glow--left"></div>
         <div class="hero-glow hero-glow--right"></div>
 
-        <main class="relative mx-auto flex min-h-screen max-w-7xl flex-col px-6 pb-16 pt-6 sm:px-8 lg:px-10">
-            <header class="flex items-center justify-between rounded-full border border-white/45 bg-white/55 px-4 py-3 shadow-[0_16px_40px_rgba(63,54,34,0.08)] backdrop-blur">
-                <div class="flex items-center gap-3">
-                    <span class="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--tm-forest)] text-[var(--tm-mist)] shadow-[0_10px_24px_rgba(59,92,68,0.28)]">
-                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M12 3l2.8 6.3L21 12l-6.2 2.7L12 21l-2.8-6.3L3 12l6.2-2.7L12 3Z"/>
-                        </svg>
-                    </span>
-                    <div>
-                        <p class="text-xs font-medium uppercase tracking-[0.34em] text-[var(--tm-fern)]">Trailmind</p>
-                        <p class="text-sm text-[var(--tm-ink-soft)]">Casual trail planning for easy weekends</p>
-                    </div>
-                </div>
+        <main class="tm-shell">
+            {{ component('ui:site_header', {
+                brand: 'Trailmind',
+                tagline: 'Casual trail planning for easy weekends',
+                items: navigation,
+            }) }}
 
-                <nav class="hidden items-center gap-6 text-sm text-[var(--tm-ink-soft)] md:flex">
-                    <a class="transition hover:text-[var(--tm-forest)]" href="#highlights">Highlights</a>
-                    <a class="transition hover:text-[var(--tm-forest)]" href="#rhythm">Rhythm</a>
-                    <a class="transition hover:text-[var(--tm-forest)]" href="#outlook">Outlook</a>
-                </nav>
-            </header>
-
-            <section class="grid flex-1 gap-12 pb-12 pt-12 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-end lg:pt-18">
+            <section class="tm-hero-grid">
                 <div class="max-w-3xl page-fade">
-                    <span class="inline-flex items-center gap-2 rounded-full border border-[var(--tm-sage)]/50 bg-white/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--tm-fern)] shadow-sm">
+                    <span class="tm-kicker-badge">
                         Quietly ambitious hiking days
                     </span>
 
-                    <h1 class="mt-7 max-w-3xl text-5xl leading-[0.96] font-semibold tracking-[-0.04em] text-[var(--tm-ink)] sm:text-6xl lg:text-7xl">
+                    <h1 class="tm-hero-title">
                         A calm front porch for hikers who like their trails scenic, simple, and unhurried.
                     </h1>
 
-                    <p class="mt-6 max-w-2xl text-lg leading-8 text-[var(--tm-ink-soft)] sm:text-xl">
+                    <p class="tm-hero-copy">
                         Trailmind is a laid-back landing point for local loops, ridge walks, and weekend resets. No clutter, no pressure, just the feel of a good route and enough room to breathe.
                     </p>
 
-                    <div class="mt-8 flex flex-wrap gap-4">
-                        <a class="inline-flex items-center rounded-full bg-[var(--tm-forest)] px-6 py-3 text-sm font-semibold text-[var(--tm-mist)] transition hover:bg-[var(--tm-fern)]" href="#highlights">See the trail mood</a>
-                        <a class="inline-flex items-center rounded-full border border-[var(--tm-sage)] bg-white/70 px-6 py-3 text-sm font-semibold text-[var(--tm-forest)] transition hover:border-[var(--tm-forest)] hover:bg-white" href="#rhythm">Read the pace</a>
+                    <div class="tm-hero-actions">
+                        <a class="tm-button-primary" href="#highlights">See the trail mood</a>
+                        <a class="tm-button-secondary" href="#rhythm">Read the pace</a>
                     </div>
 
-                    <div class="mt-10 grid gap-4 sm:grid-cols-3">
-                        <article class="rounded-[1.75rem] border border-white/55 bg-white/62 p-5 shadow-[0_14px_28px_rgba(82,69,47,0.08)] backdrop-blur drift-card" style="animation-delay: 0.08s;">
-                            <p class="text-sm uppercase tracking-[0.22em] text-[var(--tm-fern)]">Terrain</p>
-                            <p class="mt-3 text-2xl font-semibold text-[var(--tm-ink)]">Woodland to coast</p>
-                            <p class="mt-2 text-sm leading-6 text-[var(--tm-ink-soft)]">Routes that feel close to home but still worth the early start.</p>
-                        </article>
-                        <article class="rounded-[1.75rem] border border-white/55 bg-white/62 p-5 shadow-[0_14px_28px_rgba(82,69,47,0.08)] backdrop-blur drift-card" style="animation-delay: 0.16s;">
-                            <p class="text-sm uppercase tracking-[0.22em] text-[var(--tm-fern)]">Vibe</p>
-                            <p class="mt-3 text-2xl font-semibold text-[var(--tm-ink)]">Easygoing by design</p>
-                            <p class="mt-2 text-sm leading-6 text-[var(--tm-ink-soft)]">Clear trail notes, comfortable pacing, and room for a slow lunch stop.</p>
-                        </article>
-                        <article class="rounded-[1.75rem] border border-white/55 bg-white/62 p-5 shadow-[0_14px_28px_rgba(82,69,47,0.08)] backdrop-blur drift-card" style="animation-delay: 0.24s;">
-                            <p class="text-sm uppercase tracking-[0.22em] text-[var(--tm-fern)]">Focus</p>
-                            <p class="mt-3 text-2xl font-semibold text-[var(--tm-ink)]">Weekend-ready</p>
-                            <p class="mt-2 text-sm leading-6 text-[var(--tm-ink-soft)]">Built for casual hikers who still appreciate a route that feels well chosen.</p>
-                        </article>
+                    <div class="tm-feature-grid">
+                        {% for feature in heroHighlights %}
+                            {{ component('ui:feature_card', feature) }}
+                        {% endfor %}
                     </div>
                 </div>
 
-                <aside class="rounded-[2rem] border border-white/60 bg-[linear-gradient(180deg,rgba(255,255,255,0.92),rgba(233,239,227,0.86))] p-6 shadow-[0_26px_60px_rgba(70,58,40,0.12)] backdrop-blur page-fade lg:p-7" style="animation-delay: 0.14s;">
-                    <p class="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--tm-fern)]">Saturday rhythm</p>
-                    <h2 class="mt-3 text-3xl font-semibold tracking-[-0.03em] text-[var(--tm-ink)]">Plan less. Wander better.</h2>
-                    <div class="mt-6 space-y-4">
-                        <div class="rounded-[1.4rem] bg-white/80 p-4 shadow-sm">
-                            <p class="text-sm font-semibold text-[var(--tm-forest)]">08:15</p>
-                            <p class="mt-1 text-base text-[var(--tm-ink)]">Coffee in hand, boots laced, route set.</p>
-                        </div>
-                        <div class="rounded-[1.4rem] bg-white/80 p-4 shadow-sm">
-                            <p class="text-sm font-semibold text-[var(--tm-forest)]">10:40</p>
-                            <p class="mt-1 text-base text-[var(--tm-ink)]">A ridge section worth stopping for, without having to rush through it.</p>
-                        </div>
-                        <div class="rounded-[1.4rem] bg-white/80 p-4 shadow-sm">
-                            <p class="text-sm font-semibold text-[var(--tm-forest)]">13:05</p>
-                            <p class="mt-1 text-base text-[var(--tm-ink)]">Back into town with the good kind of tired and a free afternoon.</p>
-                        </div>
-                    </div>
-
-                    <div class="terrain-line mt-6 rounded-[1.5rem] p-5">
-                        <p class="text-sm leading-7 text-[var(--tm-ink-soft)]">
-                            The page stays intentionally simple for now: one calm landing space, no external links, and a clear visual direction ready for trail features later.
-                        </p>
-                    </div>
-                </aside>
+                {{ component('ui:timeline_panel', {
+                    eyebrow: 'Saturday rhythm',
+                    title: 'Plan less. Wander better.',
+                    entries: rhythmEntries,
+                    summary: 'The page stays intentionally simple for now: one calm landing space, no external links, and a clear visual direction ready for trail features later.',
+                    delay: '0.14s',
+                }) }}
             </section>
 
-            <section id="highlights" class="grid gap-6 py-8 lg:grid-cols-3">
-                <article class="rounded-[2rem] border border-white/55 bg-[rgba(255,248,239,0.8)] p-6 shadow-[0_18px_42px_rgba(78,65,43,0.09)] backdrop-blur drift-card" style="animation-delay: 0.1s;">
-                    <span class="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--tm-fern)]">Pine loop</span>
-                    <h3 class="mt-4 text-3xl font-semibold tracking-[-0.03em] text-[var(--tm-ink)]">Soft climbs, tall shade.</h3>
-                    <p class="mt-4 text-base leading-7 text-[var(--tm-ink-soft)]">A forgiving woodland route with enough elevation to feel earned, but not enough to turn the day into work.</p>
-                    <div class="mt-6 flex flex-wrap gap-2 text-xs uppercase tracking-[0.18em] text-[var(--tm-forest)]">
-                        <span class="rounded-full bg-white px-3 py-2">4.8 miles</span>
-                        <span class="rounded-full bg-white px-3 py-2">Shaded</span>
-                        <span class="rounded-full bg-white px-3 py-2">Easy pace</span>
-                    </div>
-                </article>
-
-                <article class="rounded-[2rem] border border-white/55 bg-[rgba(242,244,230,0.82)] p-6 shadow-[0_18px_42px_rgba(78,65,43,0.09)] backdrop-blur drift-card" style="animation-delay: 0.18s;">
-                    <span class="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--tm-fern)]">Coast path</span>
-                    <h3 class="mt-4 text-3xl font-semibold tracking-[-0.03em] text-[var(--tm-ink)]">Sea air, open views.</h3>
-                    <p class="mt-4 text-base leading-7 text-[var(--tm-ink-soft)]">A breezy stretch for hikers who want the drama of cliffs and sky without overcomplicating the day.</p>
-                    <div class="mt-6 flex flex-wrap gap-2 text-xs uppercase tracking-[0.18em] text-[var(--tm-forest)]">
-                        <span class="rounded-full bg-white px-3 py-2">6.1 miles</span>
-                        <span class="rounded-full bg-white px-3 py-2">Bright</span>
-                        <span class="rounded-full bg-white px-3 py-2">Lunch stop</span>
-                    </div>
-                </article>
-
-                <article class="rounded-[2rem] border border-white/55 bg-[rgba(236,231,218,0.84)] p-6 shadow-[0_18px_42px_rgba(78,65,43,0.09)] backdrop-blur drift-card" style="animation-delay: 0.26s;">
-                    <span class="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--tm-fern)]">Moorland</span>
-                    <h3 class="mt-4 text-3xl font-semibold tracking-[-0.03em] text-[var(--tm-ink)]">Wide ground, slow thoughts.</h3>
-                    <p class="mt-4 text-base leading-7 text-[var(--tm-ink-soft)]">For days when the best part of hiking is the open space, steady footing, and having nowhere urgent to be.</p>
-                    <div class="mt-6 flex flex-wrap gap-2 text-xs uppercase tracking-[0.18em] text-[var(--tm-forest)]">
-                        <span class="rounded-full bg-white px-3 py-2">5.4 miles</span>
-                        <span class="rounded-full bg-white px-3 py-2">Open views</span>
-                        <span class="rounded-full bg-white px-3 py-2">Sunset-ready</span>
-                    </div>
-                </article>
+            <section id="highlights" class="tm-trail-grid">
+                {% for trail in trailHighlights %}
+                    {{ component('ui:trail_card', trail) }}
+                {% endfor %}
             </section>
 
-            <section id="rhythm" class="grid gap-8 py-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-                <div class="page-fade" style="animation-delay: 0.18s;">
-                    <p class="text-xs font-semibold uppercase tracking-[0.32em] text-[var(--tm-fern)]">Why it feels relaxed</p>
-                    <h2 class="mt-4 max-w-2xl text-4xl font-semibold tracking-[-0.04em] text-[var(--tm-ink)] sm:text-5xl">Because the best hiking pages feel like a conversation, not a command center.</h2>
-                    <p class="mt-6 max-w-2xl text-lg leading-8 text-[var(--tm-ink-soft)]">
-                        The design keeps the mood grounded and airy at once: warm earth tones, soft glassy surfaces, and a layout that encourages browsing without shouting for attention.
-                    </p>
-                </div>
+            <section id="rhythm" class="tm-rhythm-grid">
+                {{ component('ui:section_intro', {
+                    eyebrow: 'Why it feels relaxed',
+                    title: 'Because the best hiking pages feel like a conversation, not a command center.',
+                    description: 'The design keeps the mood grounded and airy at once: warm earth tones, soft glassy surfaces, and a layout that encourages browsing without shouting for attention.',
+                    delay: '0.18s',
+                }) }}
 
                 <div class="space-y-4 page-fade" style="animation-delay: 0.28s;">
-                    <div class="rounded-[1.7rem] border border-white/55 bg-white/65 p-5 shadow-[0_14px_30px_rgba(76,61,40,0.08)]">
-                        <p class="text-lg font-semibold text-[var(--tm-forest)]">No hard sell</p>
-                        <p class="mt-2 text-sm leading-6 text-[var(--tm-ink-soft)]">Just the first impression of a trail brand that understands slower weekends and good route choices.</p>
-                    </div>
-                    <div class="rounded-[1.7rem] border border-white/55 bg-white/65 p-5 shadow-[0_14px_30px_rgba(76,61,40,0.08)]">
-                        <p class="text-lg font-semibold text-[var(--tm-forest)]">Built for growth</p>
-                        <p class="mt-2 text-sm leading-6 text-[var(--tm-ink-soft)]">Ready for internal navigation, richer trail content, and interactive features once you decide to add them.</p>
-                    </div>
-                    <div class="rounded-[1.7rem] border border-white/55 bg-white/65 p-5 shadow-[0_14px_30px_rgba(76,61,40,0.08)]">
-                        <p class="text-lg font-semibold text-[var(--tm-forest)]">Symfony-native</p>
-                        <p class="mt-2 text-sm leading-6 text-[var(--tm-ink-soft)]">Rendered with Twig, styled through Tailwind and AssetMapper, and left static on purpose for a clean starting point.</p>
-                    </div>
+                    {% for value in valueCards %}
+                        {{ component('ui:value_card', value) }}
+                    {% endfor %}
                 </div>
             </section>
 
-            <section id="outlook" class="py-8 page-fade" style="animation-delay: 0.34s;">
-                <div class="rounded-[2.2rem] border border-[var(--tm-sage)]/60 bg-[linear-gradient(135deg,rgba(67,95,72,0.96),rgba(114,138,112,0.9))] px-7 py-8 text-[var(--tm-mist)] shadow-[0_24px_60px_rgba(42,66,48,0.24)] sm:px-8 lg:px-10">
-                    <p class="text-xs font-semibold uppercase tracking-[0.34em] text-white/75">Next trail markers</p>
-                    <div class="mt-5 grid gap-5 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
-                        <div>
-                            <h2 class="text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">A simple landing page now, with plenty of room to grow into route discovery later.</h2>
-                            <p class="mt-4 max-w-2xl text-base leading-7 text-white/78">This first pass keeps the experience focused: no external destinations, no extra flows, just a homepage with a steady voice and a trail-first atmosphere.</p>
-                        </div>
-                        <div class="grid gap-3 text-sm text-white/78 sm:grid-cols-2 lg:grid-cols-1">
-                            <div class="rounded-[1.4rem] border border-white/20 bg-white/8 px-4 py-3">Route browsing slots in naturally.</div>
-                            <div class="rounded-[1.4rem] border border-white/20 bg-white/8 px-4 py-3">Live interactions can be added later with UX Live Components.</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            {{ component('ui:outlook_banner', {
+                id: 'outlook',
+                eyebrow: 'Next trail markers',
+                title: 'A simple landing page now, with plenty of room to grow into route discovery later.',
+                description: 'This first pass keeps the experience focused: no external destinations, no extra flows, just a homepage with a steady voice and a trail-first atmosphere.',
+                notes: outlookNotes,
+                delay: '0.34s',
+            }) }}
         </main>
     </div>
 {% endblock %}

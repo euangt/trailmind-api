@@ -1,93 +1,305 @@
 @import "tailwindcss";
-body {
-    margin: 0;
+:root {
+    --tm-ink: #223127;
+    --tm-ink-soft: #526257;
+    --tm-forest: #435f48;
+    --tm-fern: #6f866b;
+    --tm-sage: #bfd0bb;
+    --tm-mist: #f8f4ec;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+        body {
+            margin: 0;
         min-height: 100vh;
         background:
             radial-gradient(circle at top left, rgba(251, 246, 235, 0.95), transparent 34%),
             linear-gradient(180deg, #f3eee1 0%, #e8e1d2 100%);
-        color: #223127;
+        color: var(--tm-ink);
         font-family: "Avenir Next", "Segoe UI", "Trebuchet MS", sans-serif;
     }
-    
-    html {
-        scroll-behavior: smooth;
+}
+
+@layer components {
+    .tm-root {
+        @apply antialiased;
     }
-    
-    .landing-page {
-        position: relative;
-        min-height: 100vh;
-        background:
-            radial-gradient(circle at 15% 20%, rgba(255, 252, 245, 0.85), transparent 22%),
-            radial-gradient(circle at 85% 0%, rgba(205, 223, 207, 0.6), transparent 28%),
-            linear-gradient(180deg, rgba(250, 246, 237, 0.82), rgba(232, 224, 208, 0.92));
+
+    .tm-shell {
+        @apply relative mx-auto flex min-h-screen max-w-7xl flex-col px-6 pb-16 pt-6 sm:px-8 lg:px-10;
     }
-    
-    .landing-page::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        opacity: 0.3;
-        background-image:
-            radial-gradient(rgba(73, 62, 43, 0.09) 0.6px, transparent 0.6px),
-            radial-gradient(rgba(73, 62, 43, 0.05) 0.6px, transparent 0.6px);
-        background-position: 0 0, 18px 18px;
-        background-size: 36px 36px;
-        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9), transparent 85%);
+
+    .tm-header {
+        @apply flex items-center justify-between rounded-full border border-white/45 bg-white/55 px-4 py-3 backdrop-blur;
+        box-shadow: 0 16px 40px rgba(63, 54, 34, 0.08);
     }
-    
-    .hero-glow {
-        position: absolute;
-        z-index: 0;
-        height: 24rem;
-        width: 24rem;
-        border-radius: 9999px;
-        filter: blur(28px);
-        opacity: 0.65;
+
+    .tm-brand-mark {
+        @apply flex h-11 w-11 items-center justify-center rounded-full text-[var(--tm-mist)];
+        background: var(--tm-forest);
+        box-shadow: 0 10px 24px rgba(59, 92, 68, 0.28);
     }
-    
-    .hero-glow--left {
-        top: 5rem;
-        left: -6rem;
-        background: rgba(255, 237, 198, 0.9);
+
+    .tm-brand-name {
+        @apply text-xs font-medium uppercase tracking-[0.34em];
+        color: var(--tm-fern);
     }
-    
-    .hero-glow--right {
-        top: 8rem;
-        right: -6rem;
-        background: rgba(176, 203, 177, 0.78);
+
+    .tm-brand-tagline {
+        @apply text-sm;
+        color: var(--tm-ink-soft);
     }
-    
-    .terrain-line {
-        border: 1px solid rgba(110, 136, 108, 0.25);
-        background:
-            linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(250, 247, 239, 0.86)),
-            repeating-linear-gradient(120deg, rgba(92, 124, 96, 0.08), rgba(92, 124, 96, 0.08) 8px, transparent 8px, transparent 20px);
+
+    .tm-nav-link {
+        @apply transition;
+        color: var(--tm-ink-soft);
     }
-    
-    .page-fade {
-        animation: page-fade 720ms ease-out both;
+
+    .tm-nav-link:hover {
+        color: var(--tm-forest);
     }
-    
-    .drift-card {
-        animation: page-fade 720ms ease-out both, drift-card 5.8s ease-in-out infinite;
+
+    .tm-hero-grid {
+        @apply grid flex-1 gap-12 pb-12 pt-12 lg:grid-cols-[minmax(0, 1fr)_24rem] lg:items-end;
     }
-    
-    @keyframes page-fade {
-        from {
-            opacity: 0;
-            transform: translateY(18px);
+
+    .tm-kicker-badge {
+        @apply inline-flex items-center gap-2 rounded-full border bg-white/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] shadow-sm;
+        border-color: color-mix(in srgb, var(--tm-sage) 50%, transparent);
+        color: var(--tm-fern);
+    }
+
+    .tm-hero-title {
+        @apply mt-7 max-w-3xl text-5xl leading-[0.96] font-semibold tracking-[-0.04em] sm:text-6xl lg:text-7xl;
+        color: var(--tm-ink);
+    }
+
+    .tm-hero-copy {
+        @apply mt-6 max-w-2xl text-lg leading-8 sm:text-xl;
+        color: var(--tm-ink-soft);
+    }
+
+    .tm-hero-actions {
+        @apply mt-8 flex flex-wrap gap-4;
+    }
+
+    .tm-button-primary {
+        @apply inline-flex items-center rounded-full px-6 py-3 text-sm font-semibold transition;
+        background: var(--tm-forest);
+        color: var(--tm-mist);
+    }
+
+    .tm-button-primary:hover {
+        background: var(--tm-fern);
+    }
+
+    .tm-button-secondary {
+        @apply inline-flex items-center rounded-full border bg-white/70 px-6 py-3 text-sm font-semibold transition;
+        border-color: var(--tm-sage);
+        color: var(--tm-forest);
+    }
+
+    .tm-button-secondary:hover {
+        @apply bg-white;
+        border-color: var(--tm-forest);
+    }
+
+    .tm-feature-grid {
+        @apply mt-10 grid gap-4 sm:grid-cols-3;
+    }
+
+    .tm-feature-card {
+        @apply rounded-[1.75rem] border border-white/55 bg-white/62 p-5 backdrop-blur;
+        box-shadow: 0 14px 28px rgba(82, 69, 47, 0.08);
+    }
+
+    .tm-card-eyebrow {
+        @apply text-sm uppercase tracking-[0.22em];
+        color: var(--tm-fern);
+    }
+
+        .tm-card-title {
+            @apply mt-3 text-2xl font-semibold;
+            color: var(--tm-ink);
         }
     
-        to {
-            opacity: 1;
-            transform: translateY(0);
+        .tm-card-copy {
+            @apply mt-2 text-sm leading-6;
+            color: var(--tm-ink-soft);
         }
-    }
     
-    @keyframes drift-card {
+        .tm-timeline-panel {
+            @apply rounded-[2rem] border border-white/60 p-6 backdrop-blur lg:p-7;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(233, 239, 227, 0.86));
+            box-shadow: 0 26px 60px rgba(70, 58, 40, 0.12);
+        }
     
-        0%,
+        .tm-section-eyebrow {
+            @apply text-xs font-semibold uppercase tracking-[0.3em];
+            color: var(--tm-fern);
+        }
+    
+        .tm-timeline-title {
+            @apply mt-3 text-3xl font-semibold tracking-[-0.03em];
+            color: var(--tm-ink);
+        }
+    
+        .tm-timeline-entry {
+            @apply rounded-[1.4rem] bg-white/80 p-4 shadow-sm;
+        }
+    
+        .tm-timeline-time {
+            @apply text-sm font-semibold;
+            color: var(--tm-forest);
+        }
+    
+        .tm-trail-grid {
+            @apply grid gap-6 py-8 lg:grid-cols-3;
+        }
+    
+        .tm-trail-card {
+            @apply rounded-[2rem] border border-white/55 p-6 backdrop-blur;
+            box-shadow: 0 18px 42px rgba(78, 65, 43, 0.09);
+        }
+    
+        .tm-trail-card--sand {
+            background: rgba(255, 248, 239, 0.8);
+        }
+    
+        .tm-trail-card--sage {
+            background: rgba(242, 244, 230, 0.82);
+        }
+    
+        .tm-trail-card--stone {
+            background: rgba(236, 231, 218, 0.84);
+        }
+    
+        .tm-trail-title {
+            @apply mt-4 text-3xl font-semibold tracking-[-0.03em];
+            color: var(--tm-ink);
+        }
+    
+        .tm-trail-copy {
+            @apply mt-4 text-base leading-7;
+            color: var(--tm-ink-soft);
+        }
+    
+        .tm-chip-row {
+            @apply mt-6 flex flex-wrap gap-2 text-xs uppercase tracking-[0.18em];
+            color: var(--tm-forest);
+        }
+    
+        .tm-chip {
+            @apply rounded-full bg-white px-3 py-2;
+        }
+    
+        .tm-rhythm-grid {
+            @apply grid gap-8 py-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center;
+        }
+    
+        .tm-section-title {
+            @apply mt-4 max-w-2xl text-4xl font-semibold tracking-[-0.04em] sm:text-5xl;
+            color: var(--tm-ink);
+        }
+    
+        .tm-section-copy {
+            @apply mt-6 max-w-2xl text-lg leading-8;
+            color: var(--tm-ink-soft);
+        }
+    
+        .tm-value-card {
+            @apply rounded-[1.7rem] border border-white/55 bg-white/65 p-5;
+            box-shadow: 0 14px 30px rgba(76, 61, 40, 0.08);
+        }
+    
+        .tm-outlook-banner {
+            @apply rounded-[2.2rem] border px-7 py-8 text-[var(--tm-mist)] shadow-[0_24px_60px_rgba(42, 66, 48, 0.24)] sm:px-8 lg:px-10;
+            border-color: color-mix(in srgb, var(--tm-sage) 60%, transparent);
+            background: linear-gradient(135deg, rgba(67, 95, 72, 0.96), rgba(114, 138, 112, 0.9));
+        }
+    
+        .tm-outlook-note {
+            @apply rounded-[1.4rem] border border-white/20 bg-white/8 px-4 py-3;
+        }
+        }
+    
+        .landing-page {
+            position: relative;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(255, 252, 245, 0.85), transparent 22%),
+                radial-gradient(circle at 85% 0%, rgba(205, 223, 207, 0.6), transparent 28%),
+                linear-gradient(180deg, rgba(250, 246, 237, 0.82), rgba(232, 224, 208, 0.92));
+        }
+    
+        .landing-page::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.3;
+            background-image:
+                radial-gradient(rgba(73, 62, 43, 0.09) 0.6px, transparent 0.6px),
+                radial-gradient(rgba(73, 62, 43, 0.05) 0.6px, transparent 0.6px);
+            background-position: 0 0, 18px 18px;
+            background-size: 36px 36px;
+            mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9), transparent 85%);
+        }
+    
+        .hero-glow {
+            position: absolute;
+            z-index: 0;
+            height: 24rem;
+            width: 24rem;
+            border-radius: 9999px;
+            filter: blur(28px);
+            opacity: 0.65;
+        }
+    
+        .hero-glow--left {
+            top: 5rem;
+            left: -6rem;
+            background: rgba(255, 237, 198, 0.9);
+        }
+    
+        .hero-glow--right {
+            top: 8rem;
+            right: -6rem;
+            background: rgba(176, 203, 177, 0.78);
+        }
+    
+        .terrain-line {
+            border: 1px solid rgba(110, 136, 108, 0.25);
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(250, 247, 239, 0.86)),
+                repeating-linear-gradient(120deg, rgba(92, 124, 96, 0.08), rgba(92, 124, 96, 0.08) 8px, transparent 8px, transparent 20px);
+        }
+    
+        .page-fade {
+            animation: page-fade 720ms ease-out both;
+        }
+    
+        .drift-card {
+            animation: page-fade 720ms ease-out both, drift-card 5.8s ease-in-out infinite;
+        }
+    
+        @keyframes page-fade {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+    
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    
+        @keyframes drift-card {
+    0%,
         100% {
             transform: translateY(0);
         }
@@ -105,14 +317,5 @@ body {
         .page-fade,
         .drift-card {
             animation: none;
-        }
-    }
     
-    :root {
-        --tm-ink: #223127;
-        --tm-ink-soft: #526257;
-        --tm-forest: #435f48;
-        --tm-fern: #6f866b;
-        --tm-sage: #bfd0bb;
-        --tm-mist: #f8f4ec;
 }

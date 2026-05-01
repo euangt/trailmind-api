@@ -2,15 +2,23 @@
 
 namespace Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Application\Home\HomePage;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Environment;
 
-class HomeController extends AbstractController
+class HomeController
 {
+    public function __construct(
+        private readonly Environment $twig,
+        private readonly HomePage $homePage,
+    ) {}
+
     #[Route('/', name: 'home', methods: ['GET'])]
     public function index(): Response
     {
-        return $this->render('home/index.html.twig');
+        return new Response(
+            $this->twig->render('home/index.html.twig', $this->homePage->toArray())
+        );
     }
 }

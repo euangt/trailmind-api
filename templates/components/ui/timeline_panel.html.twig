@@ -1,0 +1,19 @@
+<aside class="tm-timeline-panel page-fade" style="animation-delay: {{ delay }};">
+    <p class="tm-section-eyebrow">{{ eyebrow }}</p>
+    <h2 class="tm-timeline-title">{{ title }}</h2>
+
+    <div class="mt-6 space-y-4">
+        {% for entry in entries %}
+            <div class="tm-timeline-entry">
+                <p class="tm-timeline-time">{{ entry.time }}</p>
+                <p class="mt-1 text-base text-[var(--tm-ink)]">{{ entry.description }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="terrain-line mt-6 rounded-[1.5rem] p-5">
+        <p class="text-sm leading-7 text-[var(--tm-ink-soft)]">
+            {{ summary }}
+        </p>
+    </div>
+</aside>

@@ -1,0 +1,11 @@
+<article class="tm-trail-card tm-trail-card--{{ tone }} drift-card" style="animation-delay: {{ delay }};">
+    <span class="tm-card-eyebrow">{{ eyebrow }}</span>
+    <h3 class="tm-trail-title">{{ title }}</h3>
+    <p class="tm-trail-copy">{{ description }}</p>
+
+    <div class="tm-chip-row">
+        {% for chip in chips %}
+            <span class="tm-chip">{{ chip }}</span>
+        {% endfor %}
+    </div>
+</article>

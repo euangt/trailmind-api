@@ -1,0 +1,19 @@
+<header class="tm-header page-fade">
+    <div class="flex items-center gap-3">
+        <span class="tm-brand-mark">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 3l2.8 6.3L21 12l-6.2 2.7L12 21l-2.8-6.3L3 12l6.2-2.7L12 3Z"/>
+            </svg>
+        </span>
+        <div>
+            <p class="tm-brand-name">{{ brand }}</p>
+            <p class="tm-brand-tagline">{{ tagline }}</p>
+        </div>
+    </div>
+
+    <nav class="hidden items-center gap-6 text-sm text-[var(--tm-ink-soft)] md:flex">
+        {% for item in items %}
+            <a class="tm-nav-link" href="{{ item.href }}">{{ item.label }}</a>
+        {% endfor %}
+    </nav>
+</header>

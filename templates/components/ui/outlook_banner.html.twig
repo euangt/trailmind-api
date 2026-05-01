@@ -1,0 +1,16 @@
+<section id="{{ id }}" class="py-8 page-fade" style="animation-delay: {{ delay }};">
+    <div class="tm-outlook-banner">
+        <p class="text-xs font-semibold uppercase tracking-[0.34em] text-white/75">{{ eyebrow }}</p>
+        <div class="mt-5 grid gap-5 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+            <div>
+                <h2 class="text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">{{ title }}</h2>
+                <p class="mt-4 max-w-2xl text-base leading-7 text-white/78">{{ description }}</p>
+            </div>
+            <div class="grid gap-3 text-sm text-white/78 sm:grid-cols-2 lg:grid-cols-1">
+                {% for note in notes %}
+                    <div class="tm-outlook-note">{{ note }}</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
