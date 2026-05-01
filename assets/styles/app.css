@@ -333,7 +333,8 @@
                 color: var(--tm-ink-soft);
             }
 
-            .tm-value-card {
+                        .tm-value-card,
+                        .tm-notice-panel {
                 border: 1px solid rgb(255 255 255 / 0.55);
                 border-radius: 1.7rem;
                 background: rgb(255 255 255 / 0.65);
@@ -341,6 +342,22 @@
                 box-shadow: 0 14px 30px rgba(76, 61, 40, 0.08);
             }
 
+                        .tm-notice-title {
+                            margin-top: 1rem;
+                            font-size: 1.875rem;
+                            line-height: 2.25rem;
+                            font-weight: 600;
+                            letter-spacing: -0.03em;
+                            color: var(--tm-ink);
+                        }
+            
+                        .tm-notice-copy {
+                            margin-top: 1rem;
+                            max-width: 42rem;
+                            font-size: 1rem;
+                            line-height: 1.75rem;
+                            color: var(--tm-ink-soft);
+                        }
             .tm-outlook-banner {
                 border: 1px solid color-mix(in srgb, var(--tm-sage) 60%, transparent);
                 border-radius: 2.2rem;

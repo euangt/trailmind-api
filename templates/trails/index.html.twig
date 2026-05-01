@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Trailmind | Trail Collection{% endblock %}
+
+{% block body_class %}tm-root{% endblock %}
+
+{% block body %}
+    <div class="landing-page relative overflow-hidden">
+        <div class="hero-glow hero-glow--left"></div>
+        <div class="hero-glow hero-glow--right"></div>
+
+        <main class="tm-shell">
+            {{ component('ui:site_header', {
+                brand: 'Trailmind',
+                tagline: 'Casual trail planning for easy weekends',
+                items: navigation,
+            }) }}
+
+            <section class="tm-hero-grid">
+                <div class="max-w-3xl page-fade">
+                    <span class="tm-kicker-badge">
+                        Trail collection
+                    </span>
+
+                    <h1 class="tm-hero-title">
+                        A lovingly kept list of trails for days that deserve a better route.
+                    </h1>
+
+                    <p class="tm-hero-copy">
+                        Browse {{ trailCount }} {{ trailCount == 1 ? 'trail' : 'trails' }} currently in the database in one calm catalogue. The map can come later; for now, the point is a list that already feels inviting and easy to compare.
+                    </p>
+
+                    <div class="tm-hero-actions">
+                        <a class="tm-button-primary" href="#collection">Browse the list</a>
+                        <a class="tm-button-secondary" href="/">Back home</a>
+                    </div>
+
+                    <div class="tm-feature-grid">
+                        {% for feature in heroHighlights %}
+                            {{ component('ui:feature_card', feature) }}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                {{ component('ui:timeline_panel', {
+                    eyebrow: 'At a glance',
+                    title: 'Find a trail that fits the day.',
+                    entries: summaryEntries,
+                    summary: 'The page stays editorial first: warm surfaces, a readable list, and clear room for the future map layer to join without crowding the experience.',
+                    delay: '0.14s',
+                }) }}
+            </section>
+
+            <section id="collection" class="py-10">
+                {{ component('ui:section_intro', {
+                    eyebrow: 'Trail list',
+                    title: 'Every current route, laid out for an easy browse.',
+                    description: 'Each card is a starting point: just enough detail to compare names, distance, and difficulty while keeping the same relaxed tone as the home page.',
+                    delay: '0.20s',
+                }) }}
+
+                {% if trailCards is not empty %}
+                    <div class="tm-trail-grid">
+                        {% for trail in trailCards %}
+                            {{ component('ui:trail_card', trail) }}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ component('ui:notice_panel', {
+                        eyebrow: 'Nothing here yet',
+                        title: 'The trail list is waiting for its first route.',
+                        description: 'Once trails are loaded into the database, they will appear here as a calmer, more considered browsing collection.',
+                        delay: '0.26s',
+                        className: 'mt-8',
+                    }) }}
+                {% endif %}
+            </section>
+
+            {{ component('ui:outlook_banner', {
+                id: 'outlook',
+                eyebrow: 'Coming next',
+                title: 'This catalogue is designed to grow into a map-first trail finder.',
+                description: 'The current page keeps the experience editorial and simple. Later, it can add location context, filtering, and richer route detail without losing the tone it starts with here.',
+                notes: outlookNotes,
+                delay: '0.34s',
+            }) }}
+        </main>
+    </div>
+{% endblock %}
