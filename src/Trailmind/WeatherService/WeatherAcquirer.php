@@ -8,9 +8,6 @@ use Trailmind\WeatherService\Exception\UnableToAcquireWeatherException;
 interface WeatherAcquirer
 {
     /**
-     * @param float $longitude
-     * @param float $latitude
-     * 
      * @throws UnableToAcquireWeatherException
      */
     public function getWeatherDataForCoordinates(float $longitude, float $latitude): Weather;

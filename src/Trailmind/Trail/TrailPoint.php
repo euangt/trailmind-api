@@ -5,6 +5,7 @@ namespace Trailmind\Trail;
 class TrailPoint
 {
     private $id;
+
     private $geom;
 
     public function __construct(

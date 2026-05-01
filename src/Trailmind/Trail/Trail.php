@@ -8,8 +8,11 @@ use Doctrine\Common\Collections\Collection;
 class Trail
 {
     private $id;
+
     private ?TrailPoint $startPoint = null;
+
     private ?TrailPoint $endPoint = null;
+
     private ?string $route = null;
 
     public function __construct(
@@ -40,7 +43,7 @@ class Trail
     }
 
     public function addTrailPoint(TrailPoint $trailPoint): void {
-        if (!$this->trailPoints->contains($trailPoint)) {
+        if (! $this->trailPoints->contains($trailPoint)) {
             $this->trailPoints->add($trailPoint);
         }
     }

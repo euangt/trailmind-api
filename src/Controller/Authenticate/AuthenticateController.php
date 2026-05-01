@@ -2,8 +2,8 @@
 
 namespace Controller\Authenticate;
 
-use Application\ValueResolver\CustomisableValueResolver;
 use Application\Dto\Inbound\User\AuthenticatingUser;
+use Application\ValueResolver\CustomisableValueResolver;
 use Dto\Outbound\Authentication\AccessTokenBuilder;
 use Dto\Outbound\Success;
 use Infrastructure\Oauth2Server\TokenManager;

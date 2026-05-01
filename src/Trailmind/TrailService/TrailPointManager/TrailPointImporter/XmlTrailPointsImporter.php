@@ -43,7 +43,7 @@ class XmlTrailPointsImporter implements TrailPointsImporter
             }
         }
 
-        if (!empty($points)) {
+        if (! empty($points)) {
             $coordinates = array_map(
                 fn($point) => sprintf('%f %f', $point->getLongitude(), $point->getLatitude()),
                 $points
@@ -57,7 +57,7 @@ class XmlTrailPointsImporter implements TrailPointsImporter
 
         return true;
     }
-    
+
     public function supportsFile(mixed $file): bool
     {
         return $file instanceof SimpleXMLElement && isset($file->trk);

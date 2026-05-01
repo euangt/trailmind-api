@@ -7,17 +7,12 @@ use Dto\Outbound\Success;
 
 class TrailCollectionBuilder extends CollectionBuilder
 {
-    /**
-     * @param TrailBuilder $trailBuilder
-     */
     public function __construct(
         private TrailBuilder $trailBuilder
     ) {}
 
     /**
      * @param mixed $initialisable
-     *
-     * @return self
      */
     protected function initialise($initialisable): self
     {
@@ -27,8 +22,8 @@ class TrailCollectionBuilder extends CollectionBuilder
         $entities = [];
         foreach ($trails as $trail) {
             $entities[] = $this->trailBuilder
-                                ->setContext($this->context)
-                                ->build($trail);
+                ->setContext($this->context)
+                ->build($trail);
         }
 
         $this->dto->add('trails', $entities);
