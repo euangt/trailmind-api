@@ -36,7 +36,8 @@ return [
         'all' => true,
     ],
     Symfony\Bundle\MakerBundle\MakerBundle::class => [
-        'dev' => true,
+        'dev' => true, 
+        'test' => true
     ],
     FriendsOfBehat\SymfonyExtension\Bundle\FriendsOfBehatSymfonyExtensionBundle::class => [
         'dev' => true,
