@@ -1,3 +1,118 @@
+@import "tailwindcss";
 body {
-    background-color: skyblue;
+    margin: 0;
+        min-height: 100vh;
+        background:
+            radial-gradient(circle at top left, rgba(251, 246, 235, 0.95), transparent 34%),
+            linear-gradient(180deg, #f3eee1 0%, #e8e1d2 100%);
+        color: #223127;
+        font-family: "Avenir Next", "Segoe UI", "Trebuchet MS", sans-serif;
+    }
+    
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    .landing-page {
+        position: relative;
+        min-height: 100vh;
+        background:
+            radial-gradient(circle at 15% 20%, rgba(255, 252, 245, 0.85), transparent 22%),
+            radial-gradient(circle at 85% 0%, rgba(205, 223, 207, 0.6), transparent 28%),
+            linear-gradient(180deg, rgba(250, 246, 237, 0.82), rgba(232, 224, 208, 0.92));
+    }
+    
+    .landing-page::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.3;
+        background-image:
+            radial-gradient(rgba(73, 62, 43, 0.09) 0.6px, transparent 0.6px),
+            radial-gradient(rgba(73, 62, 43, 0.05) 0.6px, transparent 0.6px);
+        background-position: 0 0, 18px 18px;
+        background-size: 36px 36px;
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9), transparent 85%);
+    }
+    
+    .hero-glow {
+        position: absolute;
+        z-index: 0;
+        height: 24rem;
+        width: 24rem;
+        border-radius: 9999px;
+        filter: blur(28px);
+        opacity: 0.65;
+    }
+    
+    .hero-glow--left {
+        top: 5rem;
+        left: -6rem;
+        background: rgba(255, 237, 198, 0.9);
+    }
+    
+    .hero-glow--right {
+        top: 8rem;
+        right: -6rem;
+        background: rgba(176, 203, 177, 0.78);
+    }
+    
+    .terrain-line {
+        border: 1px solid rgba(110, 136, 108, 0.25);
+        background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(250, 247, 239, 0.86)),
+            repeating-linear-gradient(120deg, rgba(92, 124, 96, 0.08), rgba(92, 124, 96, 0.08) 8px, transparent 8px, transparent 20px);
+    }
+    
+    .page-fade {
+        animation: page-fade 720ms ease-out both;
+    }
+    
+    .drift-card {
+        animation: page-fade 720ms ease-out both, drift-card 5.8s ease-in-out infinite;
+    }
+    
+    @keyframes page-fade {
+        from {
+            opacity: 0;
+            transform: translateY(18px);
+        }
+    
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes drift-card {
+    
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+    
+        50% {
+            transform: translateY(-5px);
+        }
+    }
+    
+    @media (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto;
+        }
+    
+        .page-fade,
+        .drift-card {
+            animation: none;
+        }
+    }
+    
+    :root {
+        --tm-ink: #223127;
+        --tm-ink-soft: #526257;
+        --tm-forest: #435f48;
+        --tm-fern: #6f866b;
+        --tm-sage: #bfd0bb;
+        --tm-mist: #f8f4ec;
 }
