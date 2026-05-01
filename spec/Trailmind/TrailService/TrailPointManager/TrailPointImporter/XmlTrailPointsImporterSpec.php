@@ -48,7 +48,7 @@ class XmlTrailPointsImporterSpec extends ObjectBehavior
     ) {
         $file = $this->getFile();
 
-        $trail->setTrailPoints(Argument::type('array'))->shouldBeCalled();
+        $trail->addTrailPoint(Argument::type(TrailPoint::class))->shouldBeCalledTimes(3);
         $trail->setRoute('LINESTRING(-2.648426 51.632540,-2.649024 51.632766,-2.649515 51.632941)')->shouldBeCalled();
         $trail->setStartPoint(Argument::type(TrailPoint::class))->shouldBeCalled();
         $trail->setEndPoint(Argument::type(TrailPoint::class))->shouldBeCalled();

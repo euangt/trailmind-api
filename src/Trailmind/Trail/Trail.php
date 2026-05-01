@@ -2,7 +2,8 @@
 
 namespace Trailmind\Trail;
 
-use Doctrine\ORM\PersistentCollection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 class Trail
 {
@@ -15,7 +16,7 @@ class Trail
         private string $name,
         private string $difficulty,
         private float $length,
-        private array|PersistentCollection $trailPoints = []
+        private Collection $trailPoints = new ArrayCollection()
     ) {}
 
     public function getId(): ?string {
@@ -34,18 +35,14 @@ class Trail
         return $this->length; 
     }
 
-    public function getTrailPoints(): array {
-        return $this->trailPoints instanceof PersistentCollection
-            ? $this->trailPoints->toArray()
-            : $this->trailPoints;
+    public function getTrailPoints(): Collection {
+        return $this->trailPoints;
     }
 
     public function addTrailPoint(TrailPoint $trailPoint): void {
-        $this->trailPoints[] = $trailPoint;
-    }
-
-    public function setTrailPoints(array $trailPoints): void {
-        $this->trailPoints = $trailPoints;
+        if (!$this->trailPoints->contains($trailPoint)) {
+            $this->trailPoints->add($trailPoint);
+        }
     }
 
     public function getStartPoint(): ?TrailPoint {

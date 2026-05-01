@@ -37,12 +37,11 @@ class XmlTrailPointsImporter implements TrailPointsImporter
                 );
 
                 $trailPoint->setGeom(sprintf('POINT(%f %f)', $lon, $lat));
+                $trail->addTrailPoint($trailPoint);
 
                 $points[] = $trailPoint;
             }
         }
-
-        $trail->setTrailPoints($points);
 
         if (!empty($points)) {
             $coordinates = array_map(

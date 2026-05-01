@@ -66,11 +66,15 @@ class TrailSpec extends ObjectBehavior
         TrailPoint $trailPoint3
     )
     {
-        $this->setTrailPoints([$trailPoint1, $trailPoint2]);
-        $this->getTrailPoints()->shouldReturn([$trailPoint1, $trailPoint2]);
+        $this->addTrailPoint($trailPoint1);
+        $this->addTrailPoint($trailPoint2);
+        $this->getTrailPoints()->shouldHaveCount(2);
+        $this->getTrailPoints()->shouldContain($trailPoint1);
+        $this->getTrailPoints()->shouldContain($trailPoint2);
 
         $this->addTrailPoint($trailPoint3);
-        $this->getTrailPoints()->shouldReturn([$trailPoint1, $trailPoint2, $trailPoint3]);
+        $this->getTrailPoints()->shouldHaveCount(3);
+        $this->getTrailPoints()->shouldContain($trailPoint3);
     }
 
     function it_should_get_and_set_route()
