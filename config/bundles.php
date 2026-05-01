@@ -37,7 +37,7 @@ return [
     ],
     Symfony\Bundle\MakerBundle\MakerBundle::class => [
         'dev' => true, 
-        'test' => true
+        'test' => true,
     ],
     FriendsOfBehat\SymfonyExtension\Bundle\FriendsOfBehatSymfonyExtensionBundle::class => [
         'dev' => true,

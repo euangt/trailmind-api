@@ -22,7 +22,7 @@ class TrailController
                 'trail_id' => 'id',
             ],
         ])]
-        $trail,
+        Trail $trail,
     ): Success {
         return $this->trailBuilder
             ->setContext('v1.0_view_trail')

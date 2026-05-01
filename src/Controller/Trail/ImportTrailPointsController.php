@@ -28,7 +28,7 @@ class ImportTrailPointsController
                 'trail_id' => 'id',
             ],
         ])]
-        $trail,
+        Trail $trail,
         #[MapRequestPayload(acceptFormat: 'json')]
         Filename $filename
     ): Created
