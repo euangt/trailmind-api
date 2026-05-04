@@ -2,8 +2,11 @@
 
 namespace Trailmind\User;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Trailmind\Hike\Hike;
 
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -17,7 +20,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         private string $email,
         private string $name,
         private string $username,
-        private array $roles = []
+        private array $roles = [],
+        private Collection $hikes = new ArrayCollection()
     ) {}
 
     public function getId(): ?string {
@@ -94,5 +98,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setToken(string $token): void
     {
         $this->token = $token;
+    }
+
+    public function getHikes(): Collection
+    {
+        return $this->hikes;
+    }
+    
+    public function addHike(Hike $hike): void
+    {
+        if (! $this->hikes->contains($hike)) {
+            $this->hikes->add($hike);
+        }
     }
 }

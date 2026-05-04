@@ -2,9 +2,12 @@
 
 namespace spec\Trailmind\User;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
+use Ramsey\Collection\Collection;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Trailmind\Hike\Hike;
 use Trailmind\User\User;
 
 class UserSpec extends ObjectBehavior
@@ -107,5 +110,18 @@ class UserSpec extends ObjectBehavior
         $this->getToken()->shouldReturn(null);
         $this->setToken('api-token-1234');
         $this->getToken()->shouldReturn('api-token-1234');
+    }
+    
+    function it_should_know_its_hikes(
+        Hike $hike1,
+        Hike $hike2
+    ) {
+        $this->getHikes()->shouldHaveType(ArrayCollection::class);
+        
+        $this->addHike($hike1);
+        $this->addHike($hike2);
+        
+        $this->getHikes()->shouldContain($hike1);
+        $this->getHikes()->shouldContain($hike2);
     }
 }

@@ -16,5 +16,10 @@
         <field name="password" type="string" length="255" nullable="true"/>
         <field name="token" type="string" length="64" nullable="true"/>
         <field name="roles" type="json"/>
+        <one-to-many field="hikes" target-entity="Trailmind\Hike\Hike" mapped-by="user">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
   </entity>
 </doctrine-mapping>
