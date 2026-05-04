@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Controller\Trail;
+namespace spec\Controller\Web\Trail;
 
 use Application\Trail\TrailCataloguePage;
 use Controller\Trail\TrailCatalogueController;

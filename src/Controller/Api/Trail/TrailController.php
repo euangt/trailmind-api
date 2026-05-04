@@ -1,6 +1,6 @@
 <?php
 
-namespace Controller\Trail;
+namespace Controller\Api\Trail;
 
 use Application\ValueResolver\CustomisableValueResolver;
 use Dto\Outbound\Success;

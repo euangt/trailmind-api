@@ -1,6 +1,6 @@
 <?php
 
-namespace Controller\Authenticate;
+namespace Controller\Api\Authenticate;
 
 use Application\Dto\Inbound\User\AuthenticatingUser;
 use Application\ValueResolver\CustomisableValueResolver;

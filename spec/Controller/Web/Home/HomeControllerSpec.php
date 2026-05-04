@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Controller;
+namespace spec\Controller\Web\Home;
 
 use Application\Home\HomePage;
 use PhpSpec\ObjectBehavior;

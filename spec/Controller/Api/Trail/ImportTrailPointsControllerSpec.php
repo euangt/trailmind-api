@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Controller\Trail;
+namespace spec\Controller\Api\Trail;
 
 use Application\Dto\Inbound\File\Filename;
 use Dto\Outbound\Created;

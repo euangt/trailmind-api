@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Controller\Authenticate;
+namespace spec\Controller\Api\Authenticate;
 
 use Application\Authentication\AccessToken;
 use Application\Dto\Inbound\User\AuthenticatingUser;

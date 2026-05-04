@@ -1,6 +1,6 @@
 <?php
 
-namespace Controller\Trail;
+namespace Controller\Web\Trail;
 
 use Application\Trail\TrailCataloguePage;
 use Symfony\Component\HttpFoundation\Response;

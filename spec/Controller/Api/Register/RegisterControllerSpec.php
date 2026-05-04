@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Controller\Register;
+namespace spec\Controller\Api\Register;
 
 use Application\Dto\Inbound\User\RegisteringUser;
 use Dto\Outbound\NoContent;

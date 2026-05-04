@@ -1,6 +1,6 @@
 <?php
 
-namespace Controller\Trail;
+namespace Controller\Api\Trail;
 
 use Application\Dto\Inbound\File\Filename;
 use Application\ValueResolver\CustomisableValueResolver;

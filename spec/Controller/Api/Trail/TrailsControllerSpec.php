@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Controller\Trail;
+namespace spec\Controller\Api\Trail;
 
 use Dto\Outbound\Success;
 use Dto\Outbound\Trail\TrailCollectionBuilder;
