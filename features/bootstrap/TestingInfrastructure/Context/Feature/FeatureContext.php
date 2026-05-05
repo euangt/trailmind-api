@@ -5,6 +5,7 @@ namespace TestingInfrastructure\Context\Feature;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Testwork\Hook\Scope\BeforeSuiteScope;
+use Doctrine\DBAL\ConnectionException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -156,12 +157,12 @@ class FeatureContext implements Context
         // Delete token tables in correct order due to foreign key constraints
         $tokenTables = [
             'oauth2_refresh_token',
-            'oauth2_access_token', 
+            'oauth2_access_token',
             'oauth2_authorization_code',
             'refresh_tokens',
             'access_tokens'
         ];
-        
+
         foreach ($tokenTables as $table) {
             if (in_array($table, $tables)) {
                 $stmt = $connection->prepare("DELETE FROM " . $table);
