@@ -27,9 +27,16 @@ security:
             pattern:  ^/v\d+\.\d+/authenticate
             stateless: true
 
+        reauthenticate:
+            methods: [POST]
+            pattern:  ^/v\d+\.\d+/reauthenticate
+            stateless: true
+
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+        - { path: ^/v\d+\.\d+/authenticate, roles: PUBLIC_ACCESS }
+        - { path: ^/v\d+\.\d+/reauthenticate, roles: PUBLIC_ACCESS }
         - { path: ^/v\d+\.\d+/register, roles: PUBLIC_ACCESS }
 
 when@test:

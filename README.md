@@ -17,6 +17,7 @@ The current API surface includes:
 - viewing a single trail by id
 - registering a user account
 - authenticating a user and issuing an access token
+- reauthenticating a user with a refresh token
 - importing trail points into an existing trail
 
 ## Domain Focus
