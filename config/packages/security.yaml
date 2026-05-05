@@ -15,7 +15,10 @@ security:
             security: false
         main:
             lazy: true
-            provider: users_in_memory
+            provider: app_user_provider
+            custom_authenticators:
+                - Infrastructure\Security\Authenticator\BearerTokenAuthenticator
+            entry_point: Infrastructure\Security\Authenticator\BearerTokenAuthenticator
 
         register:
             methods: [POST]
