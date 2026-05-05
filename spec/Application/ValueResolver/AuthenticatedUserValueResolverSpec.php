@@ -5,7 +5,7 @@ namespace spec\Application\ValueResolver;
 use Application\ValueResolver\AuthenticatedUserValueResolver;
 use Application\ValueResolver\CoreValueResolver;
 use Application\ValueResolver\CustomisableValueResolver;
-use Infrastructure\Oauth2Server\TokenManager;
+use Infrastructure\Security\CurrentUserProvider;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
@@ -28,10 +28,10 @@ class AuthenticatedUserValueResolverSpec extends ObjectBehavior
 
     function let(
         ArgumentMetadata $argument,
-        TokenManager $tokenManager,
+        CurrentUserProvider $currentUserProvider,
         CustomisableValueResolver $customisableValueResolver
     ) {
-        $this->beConstructedWith($tokenManager);
+        $this->beConstructedWith($currentUserProvider);
 
         $argument->getAttributes()->willReturn([$customisableValueResolver]);
         $customisableValueResolver->getOptions()->willReturn([]);
@@ -40,10 +40,10 @@ class AuthenticatedUserValueResolverSpec extends ObjectBehavior
     function it_should_resolve_with_an_authenticated_user(
         ArgumentMetadata $argument,
         Request $request,
-        TokenManager $tokenManager,
+        CurrentUserProvider $currentUserProvider,
         User $user
     ) {
-        $tokenManager->findUser($request)->shouldBeCalled()->willReturn($user);
+        $currentUserProvider->findUser()->shouldBeCalled()->willReturn($user);
 
         $this->resolve($request, $argument)->shouldReturn([$user]);
     }
@@ -51,11 +51,11 @@ class AuthenticatedUserValueResolverSpec extends ObjectBehavior
     function it_should_resolve_with_a_nullable_authenticated_user(
         ArgumentMetadata $argument,
         Request $request,
-        TokenManager $tokenManager,
+        CurrentUserProvider $currentUserProvider,
         CustomisableValueResolver $customisableValueResolver
     ) {
         $customisableValueResolver->getOptions()->willReturn(['nullable' => true]);
-        $tokenManager->findUser($request)->shouldBeCalled()->willReturn(null);
+        $currentUserProvider->findUser()->shouldBeCalled()->willReturn(null);
 
         $this->resolve($request, $argument)->shouldReturn([]);
     }
@@ -63,9 +63,9 @@ class AuthenticatedUserValueResolverSpec extends ObjectBehavior
     function it_should_throw_if_authentication_token_is_missing_for_non_nullable_user(
         ArgumentMetadata $argument,
         Request $request,
-        TokenManager $tokenManager
+        CurrentUserProvider $currentUserProvider
     ) {
-        $tokenManager->findUser($request)->shouldBeCalled()->willReturn(null);
+        $currentUserProvider->findUser()->shouldBeCalled()->willReturn(null);
 
         $this->shouldThrow(UnauthorizedHttpException::class)->duringResolve($request, $argument);
     }
@@ -73,9 +73,9 @@ class AuthenticatedUserValueResolverSpec extends ObjectBehavior
     function it_should_throw_if_authentication_token_is_invalid(
         ArgumentMetadata $argument,
         Request $request,
-        TokenManager $tokenManager
+        CurrentUserProvider $currentUserProvider
     ) {
-        $tokenManager->findUser($request)->shouldBeCalled()->willThrow(InvalidAccessTokenException::class);
+        $currentUserProvider->findUser()->shouldBeCalled()->willThrow(InvalidAccessTokenException::class);
 
         $this->shouldThrow(UnauthorizedHttpException::class)->duringResolve($request, $argument);
     }

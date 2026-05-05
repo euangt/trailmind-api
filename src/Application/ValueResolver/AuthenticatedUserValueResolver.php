@@ -2,7 +2,7 @@
 
 namespace Application\ValueResolver;
 
-use Infrastructure\Oauth2Server\TokenManager;
+use Infrastructure\Security\CurrentUserProvider;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Attribute\AsTargetedValueResolver;
 use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
@@ -14,7 +14,7 @@ use Trailmind\AuthenticationService\Exception\InvalidAccessTokenException;
 class AuthenticatedUserValueResolver extends CoreValueResolver implements ValueResolverInterface
 {
     public function __construct(
-        private TokenManager $tokenManager,
+        private CurrentUserProvider $currentUserProvider,
     ) {}
 
     public function resolve(Request $request, ArgumentMetadata $argument): iterable
@@ -22,7 +22,7 @@ class AuthenticatedUserValueResolver extends CoreValueResolver implements ValueR
         $options = $this->getOptions($argument);
 
         try {
-            $user = $this->tokenManager->findUser($request);
+            $user = $this->currentUserProvider->findUser();
         } catch (InvalidAccessTokenException $iate) {
             throw new UnauthorizedHttpException('Bearer', 'Invalid authentication token');
         }

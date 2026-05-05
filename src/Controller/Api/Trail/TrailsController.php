@@ -5,6 +5,7 @@ namespace Controller\Api\Trail;
 use Dto\Outbound\Success;
 use Dto\Outbound\Trail\TrailCollectionBuilder;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Trailmind\Trail\TrailRepository;
 
 class TrailsController
@@ -14,6 +15,7 @@ class TrailsController
         private readonly TrailCollectionBuilder $trailCollectionBuilder,
     ) {}
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/v1.0/trails', methods: ['GET'], name: 'api_v1.0_view_trails')]
     public function getTrailAction(): Success {
         return $this->trailCollectionBuilder

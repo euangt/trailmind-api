@@ -9,10 +9,10 @@ use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Trailmind\Trail\Trail;
 use Trailmind\TrailService\TrailPointManager\TrailPointImporter\TrailPointsImporter;
 use Trailmind\TrailService\TrailPointManager\TrailPointLoader\TrailPointLoader;
-use Trailmind\User\User;
 
 class ImportTrailPointsController
 {
@@ -21,10 +21,9 @@ class ImportTrailPointsController
         private TrailPointsImporter $trailPointsImporter,
     ) {}
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/v1.0/trail/{trail_id}/import-trail-points', methods: ['POST'], name: 'api_v1.0_import_trail_points')]
     public function importTrailPointsAction(
-        #[CustomisableValueResolver('authenticated_user')]
-        User $authenticatedUser,
         #[CustomisableValueResolver('entity', false, [
             'class' => Trail::class,
             'mapping' => [

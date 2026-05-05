@@ -6,6 +6,7 @@ use Application\ValueResolver\CustomisableValueResolver;
 use Dto\Outbound\Success;
 use Dto\Outbound\Trail\TrailBuilder;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Trailmind\Trail\Trail;
 
 class TrailController
@@ -14,6 +15,7 @@ class TrailController
         private readonly TrailBuilder $trailBuilder,
     ) {}
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/v1.0/trail/{trail_id}', methods: ['GET'], name: 'api_v1.0_view_trail')]
     public function getTrailAction(
         #[CustomisableValueResolver('entity', false, [
