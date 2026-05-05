@@ -3,18 +3,18 @@
 namespace spec\Controller\Api\Authenticate;
 
 use Application\Authentication\AccessToken;
-use Application\Dto\Inbound\User\AuthenticatingUser;
+use Application\Dto\Inbound\User\ReauthenticatingUser;
 use Dto\Outbound\Authentication\AccessTokenBuilder;
 use Dto\Outbound\Success;
 use Infrastructure\Oauth2Server\TokenManager;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Trailmind\AuthenticationService\Exception\InvalidCredentialsException;
+use Trailmind\AuthenticationService\Exception\InvalidRefreshTokenException;
 use Trailmind\AuthenticationService\Exception\TokenRequestException;
 use Trailmind\AuthenticationService\Exception\UnableToCreateAccessTokenException;
 
-class AuthenticateControllerSpec extends ObjectBehavior
+class ReauthenticateControllerSpec extends ObjectBehavior
 {
     function let(
         TokenManager $tokenManager,
@@ -26,32 +26,32 @@ class AuthenticateControllerSpec extends ObjectBehavior
         );
     }
 
-    function it_should_verify_a_user_with_password(
+    function it_should_refresh_an_access_token(
         TokenManager $tokenManager,
         AccessToken $accessToken,
         Request $request,
         Success $success,
         AccessTokenBuilder $accessTokenBuilder
     ) {
-        $authenticatingUser = new AuthenticatingUser('email', 'password');
+        $reauthenticatingUser = new ReauthenticatingUser('refresh-token');
 
-        $tokenManager->getAccessToken($request, $authenticatingUser)->shouldBeCalled()->willReturn($accessToken);
+        $tokenManager->reauthenticate($request, $reauthenticatingUser)->shouldBeCalled()->willReturn($accessToken);
 
-        $accessTokenBuilder->setContext('v1.0_authenticate')->shouldBeCalled()->willReturn($accessTokenBuilder);
+        $accessTokenBuilder->setContext('v1.0_reauthenticate')->shouldBeCalled()->willReturn($accessTokenBuilder);
         $accessTokenBuilder->build($accessToken)->shouldBeCalled()->willReturn($success);
 
-        $this->postAuthenticateAction($authenticatingUser, $request)->shouldReturn($success);
+        $this->postReauthenticateAction($reauthenticatingUser, $request)->shouldReturn($success);
     }
 
-    function it_should_return_a_json_error_for_invalid_credentials(
+    function it_should_return_a_json_error_for_invalid_refresh_token(
         TokenManager $tokenManager,
         Request $request
     ) {
-        $authenticatingUser = new AuthenticatingUser('email', 'wrong-password');
+        $reauthenticatingUser = new ReauthenticatingUser('invalid-refresh-token');
 
-        $tokenManager->getAccessToken($request, $authenticatingUser)->shouldBeCalled()->willThrow(InvalidCredentialsException::class);
+        $tokenManager->reauthenticate($request, $reauthenticatingUser)->shouldBeCalled()->willThrow(InvalidRefreshTokenException::class);
 
-        $response = $this->postAuthenticateAction($authenticatingUser, $request);
+        $response = $this->postReauthenticateAction($reauthenticatingUser, $request);
 
         $response->shouldBeAnInstanceOf(JsonResponse::class);
         $response->getStatusCode()->shouldReturn(401);
@@ -61,30 +61,30 @@ class AuthenticateControllerSpec extends ObjectBehavior
         TokenManager $tokenManager,
         Request $request
     ) {
-        $authenticatingUser = new AuthenticatingUser('email', 'password');
+        $reauthenticatingUser = new ReauthenticatingUser('refresh-token');
 
-        $tokenManager->getAccessToken($request, $authenticatingUser)->shouldBeCalled()->willThrow(
+        $tokenManager->reauthenticate($request, $reauthenticatingUser)->shouldBeCalled()->willThrow(
             new TokenRequestException([
                 'error' => 'invalid_client',
                 'error_description' => 'Client authentication failed',
             ], 401)
         );
 
-        $response = $this->postAuthenticateAction($authenticatingUser, $request);
+        $response = $this->postReauthenticateAction($reauthenticatingUser, $request);
 
         $response->shouldBeAnInstanceOf(JsonResponse::class);
         $response->getStatusCode()->shouldReturn(401);
     }
 
-    function it_should_return_a_server_error_json_response_when_unable_to_create_access_token(
+    function it_should_return_a_server_error_json_response_when_unable_to_refresh_access_token(
         TokenManager $tokenManager,
         Request $request
     ) {
-        $authenticatingUser = new AuthenticatingUser('email', 'password');
+        $reauthenticatingUser = new ReauthenticatingUser('refresh-token');
 
-        $tokenManager->getAccessToken($request, $authenticatingUser)->shouldBeCalled()->willThrow(UnableToCreateAccessTokenException::class);
+        $tokenManager->reauthenticate($request, $reauthenticatingUser)->shouldBeCalled()->willThrow(UnableToCreateAccessTokenException::class);
 
-        $response = $this->postAuthenticateAction($authenticatingUser, $request);
+        $response = $this->postReauthenticateAction($reauthenticatingUser, $request);
 
         $response->shouldBeAnInstanceOf(JsonResponse::class);
         $response->getStatusCode()->shouldReturn(500);

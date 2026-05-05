@@ -2,7 +2,7 @@
 
 namespace Controller\Api\Authenticate;
 
-use Application\Dto\Inbound\User\AuthenticatingUser;
+use Application\Dto\Inbound\User\ReauthenticatingUser;
 use Dto\Outbound\Authentication\AccessTokenBuilder;
 use Dto\Outbound\Success;
 use Infrastructure\Oauth2Server\TokenManager;
@@ -13,32 +13,32 @@ use Symfony\Component\Routing\Annotation\Route;
 use Trailmind\AuthenticationService\Exception\TokenRequestException;
 use Trailmind\AuthenticationService\Exception\UnableToCreateAccessTokenException;
 
-class AuthenticateController
+class ReauthenticateController
 {
     public function __construct(
         private TokenManager $tokenManager,
         private AccessTokenBuilder $accessTokenBuilder,
     ) {}
 
-    #[Route('/v1.0/authenticate', methods: ['POST'], name: 'api_v1.0_authenticate')]
-    public function postAuthenticateAction(
+    #[Route('/v1.0/reauthenticate', methods: ['POST'], name: 'api_v1.0_reauthenticate')]
+    public function postReauthenticateAction(
         #[MapRequestPayload(acceptFormat: 'json')]
-        AuthenticatingUser $authenticatingUser,
+        ReauthenticatingUser $reauthenticatingUser,
         Request $request,
     ): Success|JsonResponse {
         try {
-            $accessToken = $this->tokenManager->getAccessToken($request, $authenticatingUser);
+            $accessToken = $this->tokenManager->reauthenticate($request, $reauthenticatingUser);
         } catch (TokenRequestException $tre) {
             return new JsonResponse($tre->getPayload(), $tre->getStatusCode());
         } catch (UnableToCreateAccessTokenException $utcate) {
             return new JsonResponse([
                 'error' => 'server_error',
-                'error_description' => 'Unable to create access token',
+                'error_description' => 'Unable to refresh access token',
             ], 500);
         }
 
         return $this->accessTokenBuilder
-            ->setContext('v1.0_authenticate')
+            ->setContext('v1.0_reauthenticate')
             ->build($accessToken);
     }
 }
