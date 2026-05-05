@@ -4,6 +4,7 @@ namespace Infrastructure\Repository;
 
 use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ObjectRepository;
 use Trailmind\User\Exception\UserNotFoundException;
 use Trailmind\User\User;
 use Trailmind\User\UserRepository;
