@@ -9,4 +9,6 @@ interface UserRepository
     public function findOneById(string $id): User;
 
     public function findOneByEmail(string $email): User;
+
+    public function findOneByAccessToken(string $accessToken): User;
 }
