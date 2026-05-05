@@ -37,9 +37,7 @@ class RecordHikeController
         try {
             $trail = $this->trailRepository->findOneById($recordingHike->trailId);
         } catch (TrailNotFoundException) {
-            throw new NotFoundHttpException(
-                sprintf('No catalogue trail found with id %s', $recordingHike->trailId)
-            );
+            throw new NotFoundHttpException('Trail not found');
         }
 
         try {
