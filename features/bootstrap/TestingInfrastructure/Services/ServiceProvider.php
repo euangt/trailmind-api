@@ -3,30 +3,28 @@
 namespace TestingInfrastructure\Services;
 
 use Symfony\Component\HttpKernel\KernelInterface;
+use Trailmind\Hike\HikeRepository;
 use Trailmind\Trail\TrailRepository;
+use Trailmind\User\UserRepository;
 
 class ServiceProvider
 {
-    /**
-     * @param KernelInterface $kernel
-     */
     public function __construct(
-        private KernelInterface $kernel)
-    {}
+        private KernelInterface $kernel,
+    ) {}
 
-    /**
-     * @return TrailRepository
-     */
-    public function getTrailRepository()
+    public function getTrailRepository(): TrailRepository
     {
         return $this->kernel->getContainer()->get('Trailmind\Trail\TrailRepository');
     }
 
-    /**
-     * @return UserRepository
-     */
-    public function getUserRepository()
+    public function getUserRepository(): UserRepository
     {
         return $this->kernel->getContainer()->get('Trailmind\User\UserRepository');
+    }
+
+    public function getHikeRepository(): HikeRepository
+    {
+        return $this->kernel->getContainer()->get('Trailmind\Hike\HikeRepository');
     }
 }

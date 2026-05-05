@@ -18,3 +18,7 @@ services:
   Trailmind\User\UserRepository:
     alias: Infrastructure\Repository\DoctrineUserRepository
     public: true
+
+  Trailmind\Hike\HikeRepository:
+    alias: Infrastructure\Repository\DoctrineHikeRepository
+    public: true

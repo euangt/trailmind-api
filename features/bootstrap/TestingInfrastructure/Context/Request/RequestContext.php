@@ -11,15 +11,12 @@ class RequestContext extends RawMinkContext
 {
     const REQUEST_DOMAIN = 'api.develop.trailmind.co.uk';
 
-    /**
-     * @var FeatureContext
-     */
     private $featureContext;
+
+    private ?string $authToken = null;
 
     /**
      * @BeforeScenario
-     *
-     * @param BeforeScenarioScope $scope
      */
     public function getOtherContexts(BeforeScenarioScope $scope)
     {
@@ -27,9 +24,20 @@ class RequestContext extends RawMinkContext
     }
 
     /**
-     * @param string      $method            The HTTP verb we are using to make this request
-     * @param string      $url               The endpoint we are looking to hit
-     * @param string|null $body              Any request body that we are sending with the request
+     * @BeforeScenario
+     */
+    public function resetAuthToken(): void
+    {
+        $this->authToken = null;
+    }
+
+    public function setAuthToken(string $token): void
+    {
+        $this->authToken = $token;
+    }
+
+    /**
+     * Make a versioned JSON request using the current scenario version tag.
      */
     public function makeVersionedJsonRequest($method, $path, $body = [], $withClientHeaders = true)
     {
@@ -38,15 +46,19 @@ class RequestContext extends RawMinkContext
         }
 
         $url = sprintf('http://%s/%s/%s', self::REQUEST_DOMAIN, $this->featureContext->version, ltrim($path, '/'));
-        $this->makeHttpJsonRequest($method, $url, null, $body);
+        $this->makeHttpJsonRequest($method, $url, $this->authToken, $body);
     }
 
     /**
-     * @param string      $method            The HTTP verb we are using to make this request
-     * @param string      $url               The endpoint we are looking to hit
-     * @param string|null $token             The token to authenticate the request
-     * @param string|null $body              Any request body that we are sending with the request
+     * Make a versioned JSON request using an explicit version string, bypassing the scenario tag.
+     * Used internally for pre-scenario setup such as authentication.
      */
+    public function makeVersionedJsonRequestWithVersion(string $method, string $path, string $version, array $body = []): void
+    {
+        $url = sprintf('http://%s/%s/%s', self::REQUEST_DOMAIN, $version, ltrim($path, '/'));
+        $this->makeHttpJsonRequest($method, $url, null, $body);
+    }
+
     private function makeHttpJsonRequest(
         $method,
         $url,
