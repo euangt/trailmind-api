@@ -5,13 +5,15 @@ namespace Infrastructure\Oauth2Server\Bridge;
 use League\OAuth2\Server\Entities\ClientEntityInterface;
 use League\OAuth2\Server\Entities\UserEntityInterface;
 use League\OAuth2\Server\Repositories\UserRepositoryInterface;
+use Trailmind\AuthenticationService\PasswordVerifier;
 use Trailmind\User\Exception\UserNotFoundException;
 use Trailmind\User\UserRepository;
 
 class OauthUserRepository implements UserRepositoryInterface
 {
     public function __construct(
-        private UserRepository $userRepository
+        private UserRepository $userRepository,
+        private PasswordVerifier $passwordVerifier
     ) {}
 
     public function getUserEntityByUserCredentials(
@@ -21,8 +23,12 @@ class OauthUserRepository implements UserRepositoryInterface
         ClientEntityInterface $clientEntity
     ): ?UserEntityInterface {
         try {
-            $user = $this->userRepository->findOneByEmail($username);
+            $user = $this->userRepository->findOneByEmail((string) $username);
         } catch (UserNotFoundException $unfe) {
+            return null;
+        }
+
+        if (! $this->passwordVerifier->verifyPassword($user, (string) $password)) {
             return null;
         }
 
