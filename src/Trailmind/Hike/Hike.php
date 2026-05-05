@@ -16,19 +16,19 @@ class Hike
         private DateTime $startDate,
         private DateTime $endDate
     ) {}
-    
+
     public function getTrail(): Trail {
         return $this->trail;
     }
-    
+
     public function getUser(): User {
         return $this->user;
     }
-    
+
     public function getStartDate(): DateTime {
         return $this->startDate;
     }
-    
+
     public function getEndDate(): DateTime {
         return $this->endDate;
     }

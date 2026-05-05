@@ -104,7 +104,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->hikes;
     }
-    
+
     public function addHike(Hike $hike): void
     {
         if (! $this->hikes->contains($hike)) {

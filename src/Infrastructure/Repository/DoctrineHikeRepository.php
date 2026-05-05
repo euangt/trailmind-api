@@ -47,11 +47,11 @@ class DoctrineHikeRepository implements HikeRepository
         $this->entityManager->persist($hike);
         $this->entityManager->flush();
     }
-    
+
     public function findAllByUser(User $user): array
     {
         $queryBuilder = $this->entityManager->createQueryBuilder();
-        
+
         $queryBuilder = $queryBuilder->select('h')
             ->from(self::ENTITY, 'h')
             ->where('h.user = :user')

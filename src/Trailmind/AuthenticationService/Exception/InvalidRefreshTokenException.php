@@ -10,12 +10,12 @@ class InvalidRefreshTokenException extends TokenRequestException
 	public function __construct(array $payload = [], ?\Throwable $previous = null)
 	{
 		parent::__construct(
-			$payload + [
-				'error' => 'invalid_grant',
-				'error_description' => 'The refresh token is invalid.',
-			],
-			401,
-			$previous,
+		    $payload + [
+		        'error' => 'invalid_grant',
+		        'error_description' => 'The refresh token is invalid.',
+		    ],
+		    401,
+		    $previous,
 		);
 	}
 }
