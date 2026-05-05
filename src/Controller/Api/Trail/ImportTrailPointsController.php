@@ -10,6 +10,7 @@ use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Trailmind\FileService\Exception\UnableToLoadFileException;
 use Trailmind\Trail\Trail;
 use Trailmind\TrailService\TrailPointManager\TrailPointImporter\TrailPointsImporter;
 use Trailmind\TrailService\TrailPointManager\TrailPointLoader\TrailPointLoader;
@@ -21,7 +22,6 @@ class ImportTrailPointsController
         private TrailPointsImporter $trailPointsImporter,
     ) {}
 
-    #[IsGranted('ROLE_USER')]
     #[Route('/v1.0/trail/{trail_id}/import-trail-points', methods: ['POST'], name: 'api_v1.0_import_trail_points')]
     public function importTrailPointsAction(
         #[CustomisableValueResolver('entity', false, [
@@ -37,8 +37,8 @@ class ImportTrailPointsController
     {
         try {
             $file = $this->trailPointLoader->loadFile($filename->filename);
-        } catch (FileNotFoundException $e) {
-            throw new BadRequestHttpException($e->getMessage());
+        } catch (FileNotFoundException | UnableToLoadFileException $exception) {
+            throw new BadRequestHttpException($exception->getMessage(), $exception);
         }
 
         $this->trailPointsImporter->importFile($trail, $file);
