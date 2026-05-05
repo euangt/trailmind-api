@@ -4,7 +4,6 @@ namespace TestingInfrastructure\Context\Authentication;
 
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Behat\Context\Context;
-use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Step\Given;
 use Behat\Step\When;
@@ -38,8 +37,6 @@ class AuthenticateContext implements Context
 
     /**
      * @BeforeScenario
-     *
-     * @param BeforeScenarioScope $scope
      */
     public function getOtherContexts(BeforeScenarioScope $scope)
     {
@@ -50,17 +47,41 @@ class AuthenticateContext implements Context
     /**
      * @BeforeScenario
      */
-    public function ensureUserIsAuthenticated(BeforeScenarioScope $scope)
+    public function authenticateForTaggedScenarios(BeforeScenarioScope $scope)
     {
         foreach ($scope->getScenario()->getTags() as $tag) {
-            switch($tag) {
-                case 'user':
-                    $this->ensureUserIsAuthenticated();
-                    break;
-                default:
-                    //Do nothing
+            if ($tag === 'user') {
+                $this->authenticateAsIUser();
+                break;
             }
         }
+    }
+
+    private function authenticateAsIUser(): void
+    {
+        $user = new User(
+            self::I_USER_EMAIL,
+            self::I_USER_NAME,
+            'me_hiker',
+            ['ROLE_USER'],
+        );
+
+        $user->setPassword($this->passwordHasher->hashPassword($user, self::I_USER_PASSWORD));
+
+        $this->services->getUserRepository()->save($user);
+
+        $this->requestContext->makeVersionedJsonRequestWithVersion(
+            'POST',
+            '/authenticate',
+            'v1.0',
+            [
+                'email'    => self::I_USER_EMAIL,
+                'password' => self::I_USER_PASSWORD,
+            ]
+        );
+
+        $responseData = $this->responseContext->getResponseAsObject();
+        $this->requestContext->setAuthToken($responseData->access_token);
     }
 
     public function setUpIUser(): User

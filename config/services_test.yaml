@@ -33,6 +33,11 @@ services:
             - '@kernel'
             - '@Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface'
 
+    TestingInfrastructure\Context\Hike\HikeContext:
+        public: true
+        arguments:
+            - '@kernel'
+
     #Repositories
     Infrastructure\Repository\DoctrineTrailRepository:
       alias: TestingInfrastructure\Repositories\BehatDoctrineTrailRepository

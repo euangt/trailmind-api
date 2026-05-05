@@ -2,34 +2,43 @@
 
 namespace Trailmind\Hike;
 
-use DateTime;
+use DateTimeImmutable;
 use Trailmind\Trail\Trail;
 use Trailmind\User\User;
 
 class Hike
 {
-    private $id;    
+    private $id;
 
     public function __construct(
         private Trail $trail,
         private User $user,
-        private DateTime $startDate,
-        private DateTime $endDate
+        private DateTimeImmutable $startDate,
+        private DateTimeImmutable $endDate,
     ) {}
 
-    public function getTrail(): Trail {
+    public function getId(): mixed
+    {
+        return $this->id;
+    }
+
+    public function getTrail(): Trail
+    {
         return $this->trail;
     }
 
-    public function getUser(): User {
+    public function getUser(): User
+    {
         return $this->user;
     }
 
-    public function getStartDate(): DateTime {
+    public function getStartDate(): DateTimeImmutable
+    {
         return $this->startDate;
     }
 
-    public function getEndDate(): DateTime {
+    public function getEndDate(): DateTimeImmutable
+    {
         return $this->endDate;
     }
 }
