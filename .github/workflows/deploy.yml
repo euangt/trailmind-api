@@ -51,7 +51,7 @@ jobs:
           envsubst < deploy/Dockerrun.aws.json.template > Dockerrun.aws.json
 
       - name: Deploy to Elastic Beanstalk
-        uses: aws-actions/aws-elasticbeanstalk-deploy@v2
+        uses: aws-actions/aws-elasticbeanstalk-deploy
         with:
           application_name: ${{ env.EB_APPLICATION_NAME }}
           environment_name: ${{ env.EB_ENVIRONMENT_NAME }}
