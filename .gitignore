@@ -37,3 +37,5 @@ stacktrace.html
 ###> league/oauth2-server-bundle ###
 /config/jwt/*.pem
 ###< league/oauth2-server-bundle ###
+
+/deploy/Dockerrun.aws.json.template
