@@ -1,0 +1,44 @@
+# Version control
+.git
+.gitignore
+.gitattributes
+
+# Composer / PHP vendor — rebuilt inside the image
+vendor/
+
+# Symfony var directory — caches and logs are runtime-generated
+var/
+
+# Compiled assets — rebuilt inside the image
+public/assets/
+var/tailwind/
+
+# Local environment overrides — must never reach a production image
+.env.local
+.env.*.local
+.env.dev
+.env.test
+
+# Test suites, specs, and fixtures — not needed at runtime
+tests/
+spec/
+features/
+fixtures/
+
+# Static analysis and coding-standards tooling
+phpunit.dist.xml
+phpspec.yml
+phpstan.dist.neon
+psalm.xml
+ecs.php
+.phpunit.cache/
+
+# Local development Docker compose files
+docker-compose.yml
+compose.yaml
+compose.override.yaml
+
+# Debug and documentation artefacts
+stacktrace.html
+doctrine.yml
+README.md
